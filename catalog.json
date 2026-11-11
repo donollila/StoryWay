@@ -1,0 +1,30 @@
+{
+ "stories": [
+  {
+   "id": "detective",
+   "title": "The Case of the Missing Hamster",
+   "kind": "Kid detective",
+   "age": "Ages 6–10 · about 15 minutes",
+   "icon": "detective",
+   "owned": true
+  },
+  {
+   "id": "athlete",
+   "title": "The Championship Game",
+   "kind": "Young soccer star",
+   "age": "Ages 6–10 · about 10 minutes",
+   "icon": "athlete",
+   "owned": true
+  },
+  {
+   "id": "puppy",
+   "title": "The Lost Puppy",
+   "kind": "Neighborhood helper",
+   "age": "Ages 6–10 · about 15 minutes",
+   "icon": "puppy",
+   "owned": false,
+   "price": "$2.99",
+   "blurb": "A puppy is lost in your neighborhood, and the clues lead to a neighbor nobody talks to."
+  }
+ ]
+}

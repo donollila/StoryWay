@@ -1,0 +1,228 @@
+{
+ "id": "athlete",
+ "title": "The Championship Game",
+ "kind": "Young soccer star",
+ "age": "Ages 6–10 · about 10 minutes",
+ "start": "a1",
+ "intro": "The Championship Game.",
+ "traits": [
+  "Courage",
+  "Kindness",
+  "Honesty",
+  "Curiosity",
+  "Teamwork",
+  "Grit"
+ ],
+ "bio": {
+  "Courage": "You step up when things feel scary.",
+  "Kindness": "You notice when someone is hurting, and you help.",
+  "Honesty": "You tell the truth, even when it's hard.",
+  "Curiosity": "You look closely, and you try new things.",
+  "Teamwork": "You know that working together makes everyone stronger.",
+  "Grit": "You keep going, and you don't give up."
+ },
+ "nodes": {
+  "a1": {
+   "ch": "Chapter 1 · Practice",
+   "text": [
+    "You are the fastest player on the Tigers soccer team, and the championship game is this Saturday!",
+    "At practice, there's a new kid named Sam. Sam keeps tripping over the ball, and some of the kids are laughing.",
+    "Coach Dee blows her whistle. \"Free practice time!\""
+   ],
+   "choices": [
+    {
+     "id": "help",
+     "t": "Show Sam some dribbling tricks",
+     "to": "a2",
+     "tr": {
+      "Kindness": 1,
+      "Teamwork": 1
+     },
+     "log": "You helped Sam practice"
+    },
+    {
+     "id": "shoot",
+     "t": "Practice your own shooting, extra hard",
+     "to": "a2",
+     "tr": {
+      "Grit": 2
+     },
+     "log": "You worked hard on your shooting"
+    },
+    {
+     "id": "standup",
+     "t": "Tell the other kids to stop laughing",
+     "to": "a2",
+     "tr": {
+      "Courage": 2
+     },
+     "log": "You stood up for Sam"
+    }
+   ]
+  },
+  "a2": {
+   "ch": "Chapter 2 · Game day",
+   "text": [
+    "It's Saturday! The stands are full, and your family is cheering.",
+    "Right before halftime, you land funny and twist your ankle. It hurts. Not a lot, but it hurts.",
+    "The score is tied, one to one. Coach Dee calls out, \"Everybody okay?\""
+   ],
+   "choices": [
+    {
+     "id": "tellankle",
+     "t": "Tell Coach the truth about your ankle",
+     "to": "r1",
+     "tr": {
+      "Honesty": 2
+     },
+     "log": "You told Coach about your ankle"
+    },
+    {
+     "id": "hide",
+     "t": "Say \"I'm fine!\" and keep playing",
+     "to": "r1",
+     "tr": {
+      "Grit": 1,
+      "Honesty": -1
+     },
+     "log": "You hid your hurt ankle"
+    }
+   ]
+  },
+  "r1": {
+   "recap": true,
+   "to": "a3"
+  },
+  "a3": {
+   "ch": "Chapter 3 · The last minute",
+   "text": [
+    "One minute left. Still tied. You get the ball, and you race down the field.",
+    "A big defender is coming right at you. Out of the corner of your eye, you see Sam, wide open by the goal.",
+    "The crowd is yelling. It's time to decide!"
+   ],
+   "choices": [
+    {
+     "id": "pass",
+     "t": "Pass to Sam",
+     "to": "a4",
+     "tr": {
+      "Teamwork": 2
+     },
+     "log": "You passed to Sam"
+    },
+    {
+     "id": "shot",
+     "t": "Take the shot yourself",
+     "to": "a4",
+     "tr": {
+      "Courage": 2
+     },
+     "log": "You took the big shot"
+    },
+    {
+     "id": "trick",
+     "t": "Try a brand-new trick move",
+     "to": "a4",
+     "tr": {
+      "Curiosity": 2
+     },
+     "log": "You tried a brand-new move"
+    }
+   ]
+  },
+  "a4": {
+   "ch": "Chapter 3 · The whistle",
+   "text": [
+    "The ball flies, and... GOAL! The Tigers win the championship!",
+    "Everyone runs onto the field. But near the goal, a girl from the other team named Priya is sitting on the grass, crying.",
+    "Your teammates are jumping and shouting. Nobody else notices Priya."
+   ],
+   "choices": [
+    {
+     "id": "comfort",
+     "t": "Help Priya up and tell her \"Great game\"",
+     "to": "end",
+     "tr": {
+      "Kindness": 2
+     },
+     "log": "You comforted Priya"
+    },
+    {
+     "id": "handshake",
+     "t": "Bring your whole team over to shake hands",
+     "to": "end",
+     "tr": {
+      "Teamwork": 1,
+      "Kindness": 1
+     },
+     "log": "You led the team handshake"
+    },
+    {
+     "id": "celebrate",
+     "t": "Celebrate with your team",
+     "to": "end",
+     "tr": {},
+     "log": "You celebrated with your team"
+    }
+   ]
+  }
+ },
+ "endings": [
+  [
+   {
+    "if": "pass",
+    "id": "pass",
+    "text": "It was Sam who scored the winning goal! The new kid who kept tripping at practice. Sam ran straight to you and said, \"I couldn't have done it without you.\""
+   },
+   {
+    "if": "shot",
+    "id": "shot",
+    "text": "Your shot curved right past the goalie. The crowd went wild!"
+   },
+   {
+    "id": "trick",
+    "text": "Your brand-new move faked out the defender, and the ball rolled to Sam, who tapped it in. Nobody had ever seen a move like that!"
+   }
+  ],
+  [
+   {
+    "if": "hide",
+    "id": "hide",
+    "text": "That night, your ankle was swollen and sore. It meant two whole weeks of no soccer. Next time, telling Coach might be the smarter play."
+   },
+   {
+    "id": "tellankle",
+    "text": "Because you told Coach, the trainer wrapped your ankle at halftime, and it was ready for that big final minute."
+   }
+  ],
+  [
+   {
+    "if": "comfort",
+    "id": "kind",
+    "text": "After the game, Priya's coach found you. \"That was real sportsmanship,\" she said. Priya waved goodbye with a small smile."
+   },
+   {
+    "if": "handshake",
+    "id": "kind",
+    "text": "After the game, Priya's coach found you. \"That was real sportsmanship,\" she said. Priya waved goodbye with a small smile."
+   },
+   {
+    "id": "alone",
+    "text": "On the way home, you looked back and saw Priya still sitting on the grass. Winning felt great. But you wondered how Priya felt."
+   }
+  ]
+ ],
+ "endTitle": {
+  "Courage": "The Brave Striker",
+  "Kindness": "The Big-Hearted Captain",
+  "Honesty": "The Honest Player",
+  "Curiosity": "The Creative Playmaker",
+  "Teamwork": "The Ultimate Teammate",
+  "Grit": "The Hardest Worker"
+ },
+ "talk": [
+  "Sam was new and kept tripping. How do you think Sam felt when kids laughed?",
+  "Is it ever okay to hide when you're hurt so you can keep playing? Why or why not?",
+  "Priya's team lost. What could you say to someone who just lost a big game?"
+ ]
+}
