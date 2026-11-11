@@ -2,7 +2,7 @@
 
 Narrated choose-your-path stories for kids. Every choice shows a character trait (empathy, honesty, courage, vulnerability, and more). Weaker choices play out with real consequences and a chance to try again. Each story ends with a "What I learned" page and talk-about-it questions for parents.
 
-**Play it:** https://donollila.github.io/storyway/
+**Play it:** https://donollila.github.io/StoryWay/
 
 On iPhone, open the link in Safari, tap Share, then **Add to Home Screen**. After the first visit it works offline.
 
