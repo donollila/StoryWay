@@ -1,105 +1,1064 @@
 {
-"id":"detective","title":"The Case of the Missing Hamster","kind":"Kid detective","age":"Ages 6–10 · about 15 minutes","start":"d1",
-"intro":"The Case of the Missing Hamster.",
-"traits":["Empathy","Honesty","Courage","Respect","Vulnerability","Patience"],
-"bio":{
- "Empathy":"You notice how other people feel, and you care.",
- "Honesty":"You tell the truth, even when it's hard.",
- "Courage":"You step up when things feel scary.",
- "Respect":"You treat people fairly, and you listen to what they know.",
- "Vulnerability":"You're brave enough to share your own feelings.",
- "Patience":"You slow down, and you give things time."
-},
-"nodes":{
- "d1":{"ch":"Chapter 1 · The empty cage","text":[
-  "It's Monday morning at Maple Street School. You walk into Room 12, and you stop. The door of the hamster cage is wide open.",
-  "Peanut, the class hamster, is gone!",
-  "Ms. Rivera looks worried. \"We need a good detective,\" she says. And everyone turns to look at you."],
-  "choices":[
-   {"id":"search","t":"Search the classroom for clues","to":"d2a","tr":{"Patience":2},"log":"You searched carefully for clues",
-    "lesson":{"trait":"Patience","text":"You slowed down and looked carefully, instead of guessing. Good detectives let the clues tell the story."}},
-   {"id":"ask","t":"Ask your classmates what they saw","to":"d2b","tr":{"Respect":2},"log":"You asked your classmates for help",
-    "lesson":{"trait":"Respect","text":"You knew your classmates might have noticed things you missed, so you asked them. Listening to others is a kind of respect."}},
-   {"id":"shout","t":"Shout, \"Okay, who took Peanut?!\"","to":"d2b","tr":{"Respect":-1},"log":"You shouted at the whole class",
-    "weak":true,"missed":"Respect",
-    "consequence":"Everyone freezes. A few kids look scared, and a girl named Maya starts to cry, because she thinks she's in trouble. Nobody wants to talk to you now.",
-    "think":"When you blamed the whole room, everyone felt accused, even kids who didn't do anything. People who feel accused stop sharing what they know. Asking calmly, or looking for clues first, makes people want to help."}]},
- "d2a":{"ch":"Chapter 2 · The clue trail","text":[
-  "You get down on your hands and knees. Under the reading rug, there's a tiny trail of sunflower seeds.",
-  "The trail leads past the bookshelf, out the door, and toward the hallway lockers.",
-  "Next to the very last seed is a shiny dinosaur sticker. Only one kid in class has dinosaur stickers. Leo."],
-  "choices":[{"id":"follow","t":"Follow the trail to the lockers","to":"d3","tr":{},"log":"You followed the seed trail"}]},
- "d2b":{"ch":"Chapter 2 · The witnesses","text":[
-  "Maya raises her hand. \"I saw Leo by the cage before the bell. He looked sad.\"",
-  "Jordan adds, \"He went toward the lockers. Fast.\"",
-  "Good detectives listen to everyone. Now you have a lead."],
-  "choices":[{"id":"lockers","t":"Head to the lockers","to":"d3","tr":{},"log":"You listened to the witnesses"}]},
- "d3":{"ch":"Chapter 2 · Leo","text":[
-  "By the lockers, Leo is sitting on the floor. His eyes are red, and he's holding an empty bag of sunflower seeds.",
-  "Other kids start to gather around and whisper. What will you do?"],
-  "choices":[
-   {"id":"gentle","t":"Sit down and gently ask Leo what's wrong","to":"r1","tr":{"Empathy":2},"log":"You talked to Leo gently",
-    "lesson":{"trait":"Empathy","text":"You noticed Leo looked sad, and you cared about how he felt before deciding he was guilty. That's empathy: imagining what it's like to be someone else."}},
-   {"id":"teacher","t":"Go get Ms. Rivera","to":"r1","tr":{"Honesty":1,"Respect":1},"log":"You went to get the teacher",
-    "lesson":{"trait":"Honesty","text":"You brought in a trusted grown-up instead of handling it alone. When something big happens, getting help is honest and smart."}},
-   {"id":"accuse","t":"Point at Leo and say, \"You did it!\"","to":"r1","tr":{"Respect":-1},"log":"You accused Leo in front of everyone",
-    "weak":true,"missed":"Empathy",
-    "consequence":"Leo's face crumples. The other kids gasp and stare. Leo jumps up and runs down the hallway, crying. It takes Ms. Rivera a long time to calm him down.",
-    "think":"Pointing at Leo in front of everyone embarrassed him, before you knew the whole story. When people feel ashamed, they run or hide, instead of telling the truth. Talking to him quietly, or getting a teacher, gives Leo a chance to explain."}]},
- "r1":{"recap":true,"to":"d4"},
- "d4":{"ch":"Chapter 3 · The truth","text":[
-  "Leo sniffles, and finally starts talking. \"I just wanted to hold Peanut. I miss my dog so much. He moved away with my grandma.\"",
-  "\"I opened the cage, and Peanut ran. He went into the heater vent!\"",
-  "Leo wipes his eyes. \"Everyone's going to think I'm a bad kid.\""],
-  "choices":[
-   {"id":"share","t":"Tell Leo about a time you missed someone too","to":"d5","tr":{"Vulnerability":2,"Empathy":1},"log":"You shared your own feelings with Leo",
-    "lesson":{"trait":"Vulnerability","text":"You shared a feeling of your own. That shows Leo he's not alone. Being open about your feelings takes a special kind of courage."}},
-   {"id":"together","t":"Say, \"Come on, let's save Peanut together!\"","to":"d5","tr":{"Courage":2},"log":"You and Leo teamed up to save Peanut",
-    "lesson":{"trait":"Courage","text":"You turned a sad, scary moment into action, and you brought Leo along with you. Brave people help others be brave too."}},
-   {"id":"scold","t":"Say, \"You should have known better.\"","to":"d5","tr":{"Empathy":-1},"log":"You told Leo he should have known better",
-    "weak":true,"missed":"Empathy",
-    "consequence":"Leo looks down at the floor and gets very quiet. He doesn't say another word. He was already feeling terrible, and now he feels even worse.",
-    "think":"Leo already knew he made a mistake. When someone is sad and sorry, pointing out what they did wrong usually makes them shut down. Showing you understand first makes it easier for them to make things right."}]},
- "d5":{"ch":"Chapter 3 · The vent","text":[
-  "You kneel down by the heater vent and listen. From inside the wall comes a tiny squeak.",
-  "Peanut is in there, and he sounds scared."],
-  "choices":[
-   {"id":"wait","t":"Lay out seeds and wait very quietly","to":"d6","tr":{"Patience":2},"log":"You waited quietly with seeds",
-    "lesson":{"trait":"Patience","text":"You let Peanut come out when he felt safe. Rushing would have scared him even deeper inside. Patience gives others time to feel safe."}},
-   {"id":"custodian","t":"Ask Mr. Kim the custodian for help","to":"d6","tr":{"Respect":2},"log":"You asked Mr. Kim for help",
-    "lesson":{"trait":"Respect","text":"You knew Mr. Kim was the expert on the building, so you asked for his help. Knowing when to ask for help is a strength, not a weakness."}},
-   {"id":"bang","t":"Bang on the vent to scare him out","to":"d6","tr":{"Patience":-1},"log":"You banged on the vent",
-    "weak":true,"missed":"Patience",
-    "consequence":"Bang! Bang! Peanut squeaks, and scurries even deeper into the wall. Now you can't hear him at all. It takes the rest of the morning before he's brave enough to come back.",
-    "think":"Peanut is small, and he was already frightened. Loud noises made him feel even less safe, so he hid. Being gentle and patient helps scared creatures, and scared people, feel safe enough to come out."}]},
- "d6":{"ch":"Chapter 3 · The rescue","text":[
-  "It takes a while, but it works. A pink nose pokes out. Then whiskers. Then all of Peanut!",
-  "You scoop him up very carefully. Peanut is safe.",
-  "Leo whispers, \"Please don't tell. I'll get in so much trouble.\""],
-  "choices":[
-   {"id":"help_tell","t":"Offer to go with Leo so he can tell Ms. Rivera himself","to":"end","tr":{"Honesty":2,"Empathy":1},"log":"You helped Leo tell the truth",
-    "lesson":{"trait":"Honesty","text":"You helped Leo tell the truth himself, and you stood right beside him while he did it. That's honesty and kindness, working together."}},
-   {"id":"tellall","t":"Tell Ms. Rivera what happened yourself","to":"end","tr":{"Honesty":2},"log":"You told Ms. Rivera the whole story",
-    "lesson":{"trait":"Honesty","text":"You told the truth, even though it was hard. Ms. Rivera needed to know what happened, so she could keep Peanut safe."}},
-   {"id":"secret","t":"Promise to keep the secret","to":"end","tr":{"Honesty":-1},"log":"You promised to keep Leo's secret",
-    "weak":true,"missed":"Honesty",
-    "consequence":"You promise. Leo looks relieved. But the next morning, Ms. Rivera asks the class who opened the cage. Nobody says anything. She sighs, and says Peanut might have to move to another classroom, where he'll be safer. Your stomach twists into a knot.",
-    "think":"Keeping a secret can feel kind. But some secrets stop a problem from getting fixed. Ms. Rivera needed the truth to keep Peanut safe. You can be a good friend and be honest, by helping Leo tell the truth himself."}]}
-},
-"endings":[
- [{"id":"peanut","text":"Peanut is back in his cage, munching seeds like nothing ever happened."}],
- [{"if":"help_tell","id":"helptell","text":"Leo told Ms. Rivera everything, with you right beside him. Ms. Rivera gave him a hug, and made him Peanut's official helper for the week. Leo smiled for the first time all day."},
-  {"if":"secret","id":"secret","text":"In the end, you and Leo went to Ms. Rivera together and told her the truth. Peanut got to stay in Room 12. But that knot in your stomach taught you something. Some secrets are too heavy to carry."},
-  {"id":"tellall","text":"Ms. Rivera listened to the whole story. Leo was upset at first. But once he explained how much he missed his dog, everyone understood. The class decided to take turns holding Peanut, the safe way."}],
- [{"if":"accuse","id":"sorry","text":"Later, you remembered pointing at Leo in front of everyone, and you told him you were sorry. Leo said, \"It's okay. Thanks for finding Peanut.\""},
-  {"if":"share","id":"friends","text":"At recess, Leo found you on the playground. \"Thanks for telling me about missing someone too,\" he said. \"Want to play?\" A new friend, and a case solved."},
-  {"id":"friend","text":"At recess, Leo asked you to play. A new friend, and a case solved."}]
-],
-"endTitle":{"Empathy":"The Detective with a Big Heart","Honesty":"The Truth-Finder","Courage":"The Fearless Detective","Respect":"The Fair Detective","Vulnerability":"The Brave-Hearted Detective","Patience":"The Patient Detective"},
-"talk":[
- "Leo opened the cage because he missed his dog. Have you ever done something you shouldn't have because you were feeling sad?",
- "Why do you think it was so hard for Leo to tell the truth?",
- "Are some secrets okay to keep, and some not okay? What's the difference?",
- "Tell about a time someone showed you empathy. How did it feel?"
-]
+ "id": "detective",
+ "title": "The Case of the Missing Hamster",
+ "kind": "Kid detective",
+ "age": "Ages 6–10 · about 15 minutes",
+ "start": "d1",
+ "intro": "The Case of the Missing Hamster.",
+ "traits": [
+  "Empathy",
+  "Honesty",
+  "Courage",
+  "Respect",
+  "Vulnerability",
+  "Patience"
+ ],
+ "bio": {
+  "Empathy": "You notice how other people feel, and you care.",
+  "Honesty": "You tell the truth, even when it's hard.",
+  "Courage": "You step up when things feel scary.",
+  "Respect": "You treat people fairly, and you listen to what they know.",
+  "Vulnerability": "You're brave enough to share your own feelings.",
+  "Patience": "You slow down, and you give things time."
+ },
+ "nodes": {
+  "d1": {
+   "ch": "Chapter 1 · The empty cage",
+   "text": [
+    [
+     {
+      "t": "It's Monday morning at Maple Street School.",
+      "a": "x0229009517"
+     },
+     {
+      "t": "You walk into Room 12, and you stop.",
+      "a": "xc1e1fccef1"
+     },
+     {
+      "t": "The door of the hamster cage is wide open.",
+      "a": "x6410c09215"
+     }
+    ],
+    [
+     {
+      "t": "Peanut, the class hamster, is gone!",
+      "a": "x80f897081d"
+     }
+    ],
+    [
+     {
+      "t": "Ms. Rivera looks worried.",
+      "a": "xc9125bb1ce"
+     },
+     {
+      "t": "\"We need a good detective,\" she says.",
+      "a": "x65842d9827"
+     },
+     {
+      "t": "And everyone turns to look at you.",
+      "a": "x4c0cc0d6b4"
+     }
+    ]
+   ],
+   "choices": [
+    {
+     "id": "search",
+     "t": "Search the classroom for clues",
+     "to": "d2a",
+     "tr": {
+      "Patience": 2
+     },
+     "log": "You searched carefully for clues",
+     "lesson": {
+      "trait": "Patience",
+      "text": [
+       {
+        "t": "You slowed down and looked carefully, instead of guessing.",
+        "a": "xf9ba764700"
+       },
+       {
+        "t": "Good detectives let the clues tell the story.",
+        "a": "x9bf823cb72"
+       }
+      ],
+      "tagSay": {
+       "t": "Patience!",
+       "a": "x2aed5e510c"
+      }
+     },
+     "say": {
+      "t": "Choice one: Search the classroom for clues.",
+      "a": "x79216ace1a"
+     }
+    },
+    {
+     "id": "ask",
+     "t": "Ask your classmates what they saw",
+     "to": "d2b",
+     "tr": {
+      "Respect": 2
+     },
+     "log": "You asked your classmates for help",
+     "lesson": {
+      "trait": "Respect",
+      "text": [
+       {
+        "t": "You knew your classmates might have noticed things you missed, so you asked them.",
+        "a": "xec1003475c"
+       },
+       {
+        "t": "Listening to others is a kind of respect.",
+        "a": "x3b11560472"
+       }
+      ],
+      "tagSay": {
+       "t": "Respect!",
+       "a": "x2f70b181d9"
+      }
+     },
+     "say": {
+      "t": "Choice two: Ask your classmates what they saw.",
+      "a": "xcfb806d2d6"
+     }
+    },
+    {
+     "id": "shout",
+     "t": "Shout, \"Okay, who took Peanut?!\"",
+     "to": "d2b",
+     "tr": {
+      "Respect": -1
+     },
+     "log": "You shouted at the whole class",
+     "weak": true,
+     "missed": "Respect",
+     "consequence": [
+      [
+       {
+        "t": "Everyone freezes.",
+        "a": "xfa126712a4"
+       },
+       {
+        "t": "A few kids look scared, and a girl named Maya starts to cry, because she thinks she's in trouble.",
+        "a": "x83d957c13b"
+       },
+       {
+        "t": "Nobody wants to talk to you now.",
+        "a": "xece06d573f"
+       }
+      ]
+     ],
+     "think": [
+      {
+       "t": "When you blamed the whole room, everyone felt accused, even kids who didn't do anything.",
+       "a": "xb4b701f30b"
+      },
+      {
+       "t": "People who feel accused stop sharing what they know.",
+       "a": "xafcd42026f"
+      },
+      {
+       "t": "Asking calmly, or looking for clues first, makes people want to help.",
+       "a": "x15c4f9b32e"
+      }
+     ],
+     "say": {
+      "t": "Choice three: Shout, \"Okay, who took Peanut?!\".",
+      "a": "xe4da6cf8fc"
+     }
+    }
+   ],
+   "ask": {
+    "t": "What will you do?",
+    "a": "x90c3122a68"
+   }
+  },
+  "d2a": {
+   "ch": "Chapter 2 · The clue trail",
+   "text": [
+    [
+     {
+      "t": "You get down on your hands and knees.",
+      "a": "x1a7d701263"
+     },
+     {
+      "t": "Under the reading rug, there's a tiny trail of sunflower seeds.",
+      "a": "xdff543dac1"
+     }
+    ],
+    [
+     {
+      "t": "The trail leads past the bookshelf, out the door, and toward the hallway lockers.",
+      "a": "x19211ae94c"
+     }
+    ],
+    [
+     {
+      "t": "Next to the very last seed is a shiny dinosaur sticker.",
+      "a": "x37117f13d9"
+     },
+     {
+      "t": "Only one kid in class has dinosaur stickers.",
+      "a": "xfa34338619"
+     },
+     {
+      "t": "Leo.",
+      "a": "x3682c54459"
+     }
+    ]
+   ],
+   "choices": [
+    {
+     "id": "follow",
+     "t": "Follow the trail to the lockers",
+     "to": "d3",
+     "tr": {},
+     "log": "You followed the seed trail",
+     "say": {
+      "t": "Follow the trail to the lockers.",
+      "a": "x045a3294ef"
+     }
+    }
+   ],
+   "ask": {
+    "t": "When you're ready, tap:",
+    "a": "xa704599756"
+   }
+  },
+  "d2b": {
+   "ch": "Chapter 2 · The witnesses",
+   "text": [
+    [
+     {
+      "t": "Maya raises her hand.",
+      "a": "x80a898b9ae"
+     },
+     {
+      "t": "\"I saw Leo by the cage before the bell.",
+      "a": "x06aa9f6b1e"
+     },
+     {
+      "t": "He looked sad.\"",
+      "a": "xf2828ffd99"
+     }
+    ],
+    [
+     {
+      "t": "Jordan adds, \"He went toward the lockers.",
+      "a": "x716ec13d3a"
+     },
+     {
+      "t": "Fast.\"",
+      "a": "xc575b09410"
+     }
+    ],
+    [
+     {
+      "t": "Good detectives listen to everyone.",
+      "a": "x3556606f87"
+     },
+     {
+      "t": "Now you have a lead.",
+      "a": "x6f4bde5213"
+     }
+    ]
+   ],
+   "choices": [
+    {
+     "id": "lockers",
+     "t": "Head to the lockers",
+     "to": "d3",
+     "tr": {},
+     "log": "You listened to the witnesses",
+     "say": {
+      "t": "Head to the lockers.",
+      "a": "x86b0f20a6d"
+     }
+    }
+   ],
+   "ask": {
+    "t": "When you're ready, tap:",
+    "a": "xa704599756"
+   }
+  },
+  "d3": {
+   "ch": "Chapter 2 · Leo",
+   "text": [
+    [
+     {
+      "t": "By the lockers, Leo is sitting on the floor.",
+      "a": "x6986ba6505"
+     },
+     {
+      "t": "His eyes are red, and he's holding an empty bag of sunflower seeds.",
+      "a": "x25917906b9"
+     }
+    ],
+    [
+     {
+      "t": "Other kids start to gather around and whisper.",
+      "a": "xce1a9db623"
+     },
+     {
+      "t": "What will you do?",
+      "a": "x90c3122a68"
+     }
+    ]
+   ],
+   "choices": [
+    {
+     "id": "gentle",
+     "t": "Sit down and gently ask Leo what's wrong",
+     "to": "r1",
+     "tr": {
+      "Empathy": 2
+     },
+     "log": "You talked to Leo gently",
+     "lesson": {
+      "trait": "Empathy",
+      "text": [
+       {
+        "t": "You noticed Leo looked sad, and you cared about how he felt before deciding he was guilty.",
+        "a": "x31b5b859db"
+       },
+       {
+        "t": "That's empathy: imagining what it's like to be someone else.",
+        "a": "xe223a86671"
+       }
+      ],
+      "tagSay": {
+       "t": "Empathy!",
+       "a": "x3b4a92e9ca"
+      }
+     },
+     "say": {
+      "t": "Choice one: Sit down and gently ask Leo what's wrong.",
+      "a": "x08641fe5b1"
+     }
+    },
+    {
+     "id": "teacher",
+     "t": "Go get Ms. Rivera",
+     "to": "r1",
+     "tr": {
+      "Honesty": 1,
+      "Respect": 1
+     },
+     "log": "You went to get the teacher",
+     "lesson": {
+      "trait": "Honesty",
+      "text": [
+       {
+        "t": "You brought in a trusted grown-up instead of handling it alone.",
+        "a": "x147e6f5634"
+       },
+       {
+        "t": "When something big happens, getting help is honest and smart.",
+        "a": "x6747fccf60"
+       }
+      ],
+      "tagSay": {
+       "t": "Honesty!",
+       "a": "xd83e254d53"
+      }
+     },
+     "say": {
+      "t": "Choice two: Go get Ms. Rivera.",
+      "a": "xfbb443646e"
+     }
+    },
+    {
+     "id": "accuse",
+     "t": "Point at Leo and say, \"You did it!\"",
+     "to": "r1",
+     "tr": {
+      "Respect": -1
+     },
+     "log": "You accused Leo in front of everyone",
+     "weak": true,
+     "missed": "Empathy",
+     "consequence": [
+      [
+       {
+        "t": "Leo's face crumples.",
+        "a": "x4b8bc44915"
+       },
+       {
+        "t": "The other kids gasp and stare.",
+        "a": "x80cf0d7395"
+       },
+       {
+        "t": "Leo jumps up and runs down the hallway, crying.",
+        "a": "x855ce20f8b"
+       },
+       {
+        "t": "It takes Ms. Rivera a long time to calm him down.",
+        "a": "x4f77abc56a"
+       }
+      ]
+     ],
+     "think": [
+      {
+       "t": "Pointing at Leo in front of everyone embarrassed him, before you knew the whole story.",
+       "a": "xfd8d7a595b"
+      },
+      {
+       "t": "When people feel ashamed, they run or hide, instead of telling the truth.",
+       "a": "x1d18f742e3"
+      },
+      {
+       "t": "Talking to him quietly, or getting a teacher, gives Leo a chance to explain.",
+       "a": "x5fb361fbbd"
+      }
+     ],
+     "say": {
+      "t": "Choice three: Point at Leo and say, \"You did it!\".",
+      "a": "xed815e4831"
+     }
+    }
+   ],
+   "ask": {
+    "t": "What will you do?",
+    "a": "x90c3122a68"
+   }
+  },
+  "r1": {
+   "recap": true,
+   "to": "d4"
+  },
+  "d4": {
+   "ch": "Chapter 3 · The truth",
+   "text": [
+    [
+     {
+      "t": "Leo sniffles, and finally starts talking.",
+      "a": "x836b9af5a0"
+     },
+     {
+      "t": "\"I just wanted to hold Peanut.",
+      "a": "x4542945138"
+     },
+     {
+      "t": "I miss my dog so much.",
+      "a": "xe89ce098d3"
+     },
+     {
+      "t": "He moved away with my grandma.\"",
+      "a": "x5257a6b53f"
+     }
+    ],
+    [
+     {
+      "t": "\"I opened the cage, and Peanut ran.",
+      "a": "xb20b6599d4"
+     },
+     {
+      "t": "He went into the heater vent!\"",
+      "a": "x88ba8997c4"
+     }
+    ],
+    [
+     {
+      "t": "Leo wipes his eyes.",
+      "a": "x48310d5d6f"
+     },
+     {
+      "t": "\"Everyone's going to think I'm a bad kid.\"",
+      "a": "x63b126b60c"
+     }
+    ]
+   ],
+   "choices": [
+    {
+     "id": "share",
+     "t": "Tell Leo about a time you missed someone too",
+     "to": "d5",
+     "tr": {
+      "Vulnerability": 2,
+      "Empathy": 1
+     },
+     "log": "You shared your own feelings with Leo",
+     "lesson": {
+      "trait": "Vulnerability",
+      "text": [
+       {
+        "t": "You shared a feeling of your own.",
+        "a": "x955762d4be"
+       },
+       {
+        "t": "That shows Leo he's not alone.",
+        "a": "x125e568f33"
+       },
+       {
+        "t": "Being open about your feelings takes a special kind of courage.",
+        "a": "x8f54f3f2ce"
+       }
+      ],
+      "tagSay": {
+       "t": "Vulnerability!",
+       "a": "x26fe8ab26c"
+      }
+     },
+     "say": {
+      "t": "Choice one: Tell Leo about a time you missed someone too.",
+      "a": "x4bd66f963f"
+     }
+    },
+    {
+     "id": "together",
+     "t": "Say, \"Come on, let's save Peanut together!\"",
+     "to": "d5",
+     "tr": {
+      "Courage": 2
+     },
+     "log": "You and Leo teamed up to save Peanut",
+     "lesson": {
+      "trait": "Courage",
+      "text": [
+       {
+        "t": "You turned a sad, scary moment into action, and you brought Leo along with you.",
+        "a": "xb5fb2d72a1"
+       },
+       {
+        "t": "Brave people help others be brave too.",
+        "a": "x38e2f645a1"
+       }
+      ],
+      "tagSay": {
+       "t": "Courage!",
+       "a": "xb799695b96"
+      }
+     },
+     "say": {
+      "t": "Choice two: Say, \"Come on, let's save Peanut together!\".",
+      "a": "xfde2ce7e37"
+     }
+    },
+    {
+     "id": "scold",
+     "t": "Say, \"You should have known better.\"",
+     "to": "d5",
+     "tr": {
+      "Empathy": -1
+     },
+     "log": "You told Leo he should have known better",
+     "weak": true,
+     "missed": "Empathy",
+     "consequence": [
+      [
+       {
+        "t": "Leo looks down at the floor and gets very quiet.",
+        "a": "x89f65f8bb7"
+       },
+       {
+        "t": "He doesn't say another word.",
+        "a": "x7a7ac0e85f"
+       },
+       {
+        "t": "He was already feeling terrible, and now he feels even worse.",
+        "a": "xa61c0a8544"
+       }
+      ]
+     ],
+     "think": [
+      {
+       "t": "Leo already knew he made a mistake.",
+       "a": "xd7bc35cb97"
+      },
+      {
+       "t": "When someone is sad and sorry, pointing out what they did wrong usually makes them shut down.",
+       "a": "x273d21a002"
+      },
+      {
+       "t": "Showing you understand first makes it easier for them to make things right.",
+       "a": "x79973cfc45"
+      }
+     ],
+     "say": {
+      "t": "Choice three: Say, \"You should have known better.\".",
+      "a": "xbf246bb59a"
+     }
+    }
+   ],
+   "ask": {
+    "t": "What will you do?",
+    "a": "x90c3122a68"
+   }
+  },
+  "d5": {
+   "ch": "Chapter 3 · The vent",
+   "text": [
+    [
+     {
+      "t": "You kneel down by the heater vent and listen.",
+      "a": "x25797693f5"
+     },
+     {
+      "t": "From inside the wall comes a tiny squeak.",
+      "a": "xa4c44a9107"
+     }
+    ],
+    [
+     {
+      "t": "Peanut is in there, and he sounds scared.",
+      "a": "x342c49799c"
+     }
+    ]
+   ],
+   "choices": [
+    {
+     "id": "wait",
+     "t": "Lay out seeds and wait very quietly",
+     "to": "d6",
+     "tr": {
+      "Patience": 2
+     },
+     "log": "You waited quietly with seeds",
+     "lesson": {
+      "trait": "Patience",
+      "text": [
+       {
+        "t": "You let Peanut come out when he felt safe.",
+        "a": "xbd818fa7d7"
+       },
+       {
+        "t": "Rushing would have scared him even deeper inside.",
+        "a": "x9c8c9ff0a3"
+       },
+       {
+        "t": "Patience gives others time to feel safe.",
+        "a": "x58b55c0069"
+       }
+      ],
+      "tagSay": {
+       "t": "Patience!",
+       "a": "x2aed5e510c"
+      }
+     },
+     "say": {
+      "t": "Choice one: Lay out seeds and wait very quietly.",
+      "a": "x164323928b"
+     }
+    },
+    {
+     "id": "custodian",
+     "t": "Ask Mr. Kim the custodian for help",
+     "to": "d6",
+     "tr": {
+      "Respect": 2
+     },
+     "log": "You asked Mr. Kim for help",
+     "lesson": {
+      "trait": "Respect",
+      "text": [
+       {
+        "t": "You knew Mr. Kim was the expert on the building, so you asked for his help.",
+        "a": "x2a67d04775"
+       },
+       {
+        "t": "Knowing when to ask for help is a strength, not a weakness.",
+        "a": "x5cf7163607"
+       }
+      ],
+      "tagSay": {
+       "t": "Respect!",
+       "a": "x2f70b181d9"
+      }
+     },
+     "say": {
+      "t": "Choice two: Ask Mr. Kim the custodian for help.",
+      "a": "xb8786af610"
+     }
+    },
+    {
+     "id": "bang",
+     "t": "Bang on the vent to scare him out",
+     "to": "d6",
+     "tr": {
+      "Patience": -1
+     },
+     "log": "You banged on the vent",
+     "weak": true,
+     "missed": "Patience",
+     "consequence": [
+      [
+       {
+        "t": "Bang!",
+        "a": "xaf3b9391c6"
+       },
+       {
+        "t": "Bang!",
+        "a": "xaf3b9391c6"
+       },
+       {
+        "t": "Peanut squeaks, and scurries even deeper into the wall.",
+        "a": "x2ff6efe180"
+       },
+       {
+        "t": "Now you can't hear him at all.",
+        "a": "x194ec45d6c"
+       },
+       {
+        "t": "It takes the rest of the morning before he's brave enough to come back.",
+        "a": "x67f64b2ccc"
+       }
+      ]
+     ],
+     "think": [
+      {
+       "t": "Peanut is small, and he was already frightened.",
+       "a": "xd83d2654cd"
+      },
+      {
+       "t": "Loud noises made him feel even less safe, so he hid.",
+       "a": "xa3d1d22689"
+      },
+      {
+       "t": "Being gentle and patient helps scared creatures, and scared people, feel safe enough to come out.",
+       "a": "x7ca6776d52"
+      }
+     ],
+     "say": {
+      "t": "Choice three: Bang on the vent to scare him out.",
+      "a": "x5c9e33761e"
+     }
+    }
+   ],
+   "ask": {
+    "t": "What will you do?",
+    "a": "x90c3122a68"
+   }
+  },
+  "d6": {
+   "ch": "Chapter 3 · The rescue",
+   "text": [
+    [
+     {
+      "t": "It takes a while, but it works.",
+      "a": "x8c850da99f"
+     },
+     {
+      "t": "A pink nose pokes out.",
+      "a": "x4db5574415"
+     },
+     {
+      "t": "Then whiskers.",
+      "a": "x31991bfb05"
+     },
+     {
+      "t": "Then all of Peanut!",
+      "a": "xaee345e655"
+     }
+    ],
+    [
+     {
+      "t": "You scoop him up very carefully.",
+      "a": "xab2bdee6fa"
+     },
+     {
+      "t": "Peanut is safe.",
+      "a": "x8e2be09f9e"
+     }
+    ],
+    [
+     {
+      "t": "Leo whispers, \"Please don't tell.",
+      "a": "x9b79fcea1e"
+     },
+     {
+      "t": "I'll get in so much trouble.\"",
+      "a": "x48fc57c710"
+     }
+    ]
+   ],
+   "choices": [
+    {
+     "id": "help_tell",
+     "t": "Offer to go with Leo so he can tell Ms. Rivera himself",
+     "to": "end",
+     "tr": {
+      "Honesty": 2,
+      "Empathy": 1
+     },
+     "log": "You helped Leo tell the truth",
+     "lesson": {
+      "trait": "Honesty",
+      "text": [
+       {
+        "t": "You helped Leo tell the truth himself, and you stood right beside him while he did it.",
+        "a": "x57b50c3d6e"
+       },
+       {
+        "t": "That's honesty and kindness, working together.",
+        "a": "x1b17a514a9"
+       }
+      ],
+      "tagSay": {
+       "t": "Honesty!",
+       "a": "xd83e254d53"
+      }
+     },
+     "say": {
+      "t": "Choice one: Offer to go with Leo so he can tell Ms. Rivera himself.",
+      "a": "x89eb5c2d8d"
+     }
+    },
+    {
+     "id": "tellall",
+     "t": "Tell Ms. Rivera what happened yourself",
+     "to": "end",
+     "tr": {
+      "Honesty": 2
+     },
+     "log": "You told Ms. Rivera the whole story",
+     "lesson": {
+      "trait": "Honesty",
+      "text": [
+       {
+        "t": "You told the truth, even though it was hard.",
+        "a": "xbb92812bca"
+       },
+       {
+        "t": "Ms. Rivera needed to know what happened, so she could keep Peanut safe.",
+        "a": "x961258bc43"
+       }
+      ],
+      "tagSay": {
+       "t": "Honesty!",
+       "a": "xd83e254d53"
+      }
+     },
+     "say": {
+      "t": "Choice two: Tell Ms. Rivera what happened yourself.",
+      "a": "x909acf3dfb"
+     }
+    },
+    {
+     "id": "secret",
+     "t": "Promise to keep the secret",
+     "to": "end",
+     "tr": {
+      "Honesty": -1
+     },
+     "log": "You promised to keep Leo's secret",
+     "weak": true,
+     "missed": "Honesty",
+     "consequence": [
+      [
+       {
+        "t": "You promise.",
+        "a": "x44a50bfb99"
+       },
+       {
+        "t": "Leo looks relieved.",
+        "a": "x6a225a0b27"
+       },
+       {
+        "t": "But the next morning, Ms. Rivera asks the class who opened the cage.",
+        "a": "x54641f7cb9"
+       },
+       {
+        "t": "Nobody says anything.",
+        "a": "x3ce1dab474"
+       },
+       {
+        "t": "She sighs, and says Peanut might have to move to another classroom, where he'll be safer.",
+        "a": "xfd19e9faff"
+       },
+       {
+        "t": "Your stomach twists into a knot.",
+        "a": "xb4de8fa51d"
+       }
+      ]
+     ],
+     "think": [
+      {
+       "t": "Keeping a secret can feel kind.",
+       "a": "xe93b658f9c"
+      },
+      {
+       "t": "But some secrets stop a problem from getting fixed.",
+       "a": "xc28f8a0fe8"
+      },
+      {
+       "t": "Ms. Rivera needed the truth to keep Peanut safe.",
+       "a": "xe34337fbde"
+      },
+      {
+       "t": "You can be a good friend and be honest, by helping Leo tell the truth himself.",
+       "a": "xc2b161505d"
+      }
+     ],
+     "say": {
+      "t": "Choice three: Promise to keep the secret.",
+      "a": "xd25babe957"
+     }
+    }
+   ],
+   "ask": {
+    "t": "What will you do?",
+    "a": "x90c3122a68"
+   }
+  }
+ },
+ "endings": [
+  [
+   {
+    "id": "peanut",
+    "text": [
+     {
+      "t": "Peanut is back in his cage, munching seeds like nothing ever happened.",
+      "a": "x3f5534eee6"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "if": "help_tell",
+    "id": "helptell",
+    "text": [
+     {
+      "t": "Leo told Ms. Rivera everything, with you right beside him.",
+      "a": "x88f3c7ce49"
+     },
+     {
+      "t": "Ms. Rivera gave him a hug, and made him Peanut's official helper for the week.",
+      "a": "xf40c3cab22"
+     },
+     {
+      "t": "Leo smiled for the first time all day.",
+      "a": "x6912c577ef"
+     }
+    ]
+   },
+   {
+    "if": "secret",
+    "id": "secret",
+    "text": [
+     {
+      "t": "In the end, you and Leo went to Ms. Rivera together and told her the truth.",
+      "a": "xaaaafcc320"
+     },
+     {
+      "t": "Peanut got to stay in Room 12.",
+      "a": "x0326187931"
+     },
+     {
+      "t": "But that knot in your stomach taught you something.",
+      "a": "x7bc30d3a84"
+     },
+     {
+      "t": "Some secrets are too heavy to carry.",
+      "a": "x510644c284"
+     }
+    ]
+   },
+   {
+    "id": "tellall",
+    "text": [
+     {
+      "t": "Ms. Rivera listened to the whole story.",
+      "a": "xe8c5afd48a"
+     },
+     {
+      "t": "Leo was upset at first.",
+      "a": "xac4f43724a"
+     },
+     {
+      "t": "But once he explained how much he missed his dog, everyone understood.",
+      "a": "x13e5a07a6e"
+     },
+     {
+      "t": "The class decided to take turns holding Peanut, the safe way.",
+      "a": "x0890ff3c26"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "if": "accuse",
+    "id": "sorry",
+    "text": [
+     {
+      "t": "Later, you remembered pointing at Leo in front of everyone, and you told him you were sorry.",
+      "a": "x084434dbb0"
+     },
+     {
+      "t": "Leo said, \"It's okay.",
+      "a": "x70ad9a444f"
+     },
+     {
+      "t": "Thanks for finding Peanut.\"",
+      "a": "x5043491d3b"
+     }
+    ]
+   },
+   {
+    "if": "share",
+    "id": "friends",
+    "text": [
+     {
+      "t": "At recess, Leo found you on the playground.",
+      "a": "x0f673f5f50"
+     },
+     {
+      "t": "\"Thanks for telling me about missing someone too,\" he said.",
+      "a": "x2c4db69e10"
+     },
+     {
+      "t": "\"Want to play?\"",
+      "a": "x1e492418c7"
+     },
+     {
+      "t": "A new friend, and a case solved.",
+      "a": "x1466667882"
+     }
+    ]
+   },
+   {
+    "id": "friend",
+    "text": [
+     {
+      "t": "At recess, Leo asked you to play.",
+      "a": "xe8c7cf9f44"
+     },
+     {
+      "t": "A new friend, and a case solved.",
+      "a": "x1466667882"
+     }
+    ]
+   }
+  ]
+ ],
+ "endTitle": {
+  "Empathy": "The Detective with a Big Heart",
+  "Honesty": "The Truth-Finder",
+  "Courage": "The Fearless Detective",
+  "Respect": "The Fair Detective",
+  "Vulnerability": "The Brave-Hearted Detective",
+  "Patience": "The Patient Detective"
+ },
+ "talk": [
+  "Leo opened the cage because he missed his dog. Have you ever done something you shouldn't have because you were feeling sad?",
+  "Why do you think it was so hard for Leo to tell the truth?",
+  "Are some secrets okay to keep, and some not okay? What's the difference?",
+  "Tell about a time someone showed you empathy. How did it feel?"
+ ],
+ "startSay": {
+  "t": "The Case of the Missing Hamster.",
+  "a": "x2d3895ce4b"
+ },
+ "thinkSay": {
+  "t": "Hmm. Let's think about that.",
+  "a": "xc22997da39"
+ },
+ "retrySay": {
+  "t": "You can try that moment again, or keep going.",
+  "a": "x20d3cee4e8"
+ },
+ "keepSay": {
+  "t": "Tap keep going when you're ready.",
+  "a": "xc87085e18c"
+ }
 }

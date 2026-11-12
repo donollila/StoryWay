@@ -22,18 +22,18 @@
 :root{
   --bg:#E8F2EF; --card:#FFFFFF; --ink:#1E2A3A; --muted:#5A6878;
   --accent:#6A3FA0; --accent-soft:#EFE7FA; --sun:#E9A72E; --line:#D3E2DD;
-  --good:#2E8B5A; --bad:#B4483B;
+  --good:#2E8B5A; --bad:#B4483B; --hl:#FBE3A6;
   --display:"Baloo 2", "Trebuchet MS", system-ui, sans-serif;
   --body:"Nunito", system-ui, -apple-system, sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#131A26; --card:#1D2637; --ink:#EDF1F7; --muted:#A0ACBC;
   --accent:#B89BF0; --accent-soft:#2A2343; --sun:#F3C25A; --line:#2C3649;
-  --good:#5CC48D; --bad:#E7887B; color-scheme:dark }}
+  --good:#5CC48D; --bad:#E7887B; --hl:#5A4615; color-scheme:dark }}
 :root[data-theme="dark"]{
   --bg:#131A26; --card:#1D2637; --ink:#EDF1F7; --muted:#A0ACBC;
   --accent:#B89BF0; --accent-soft:#2A2343; --sun:#F3C25A; --line:#2C3649;
-  --good:#5CC48D; --bad:#E7887B; color-scheme:dark }
+  --good:#5CC48D; --bad:#E7887B; --hl:#5A4615; color-scheme:dark }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%}
 button,label{touch-action:manipulation;-webkit-user-select:none;user-select:none}
@@ -113,6 +113,9 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-of
 .learned li{line-height:1.5}
 .talk{background:var(--card);border-radius:20px;padding:20px;border:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
 .talk ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
+.s{border-radius:6px;cursor:pointer;transition:background-color .2s,box-shadow .2s;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.s.reading{background:var(--hl);box-shadow:0 0 0 3px var(--hl)}
+[data-q].reading:not(.s){outline:3px solid var(--sun);outline-offset:3px}
 .loading{color:var(--muted);text-align:center;padding:40px 0}
 </style>
 </head>
@@ -134,18 +137,27 @@ const app=document.getElementById("app");
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const getJSON=u=>fetch(u).then(r=>{if(!r.ok)throw new Error(u);return r.json()});
 
-/* ---------- AUDIO ---------- */
+/* ---------- AUDIO: a queue of clips, each tied to the words it reads ---------- */
 const audio=new Audio(); audio.preload="auto"; audio.setAttribute("playsinline","");
 try{ if(navigator.audioSession) navigator.audioSession.type="playback"; }catch(e){}
-let queue=[],qi=0,playing=false,current=[];
+let queue=[],qi=0,playing=false,current=[],Q=[];
 const clipUrl=c=>c.startsWith("common/")?`audio/${c}.mp3`:`stories/${ST.id}/audio/${c}.mp3`;
 function setPlaying(on){playing=on;document.querySelector(".player")?.classList.toggle("speaking",on);setPlayIcon(on);}
-function playQueue(list){queue=list;qi=0;next();}
-function next(){ if(qi>=queue.length){setPlaying(false);return;}
-  audio.src=clipUrl(queue[qi++]); audio.play().then(()=>setPlaying(true)).catch(()=>setPlaying(false)); }
+function highlight(k){
+  app.querySelectorAll(".reading").forEach(e=>e.classList.remove("reading"));
+  if(k==null)return;
+  const els=app.querySelectorAll(`[data-q="${k}"]`); els.forEach(e=>e.classList.add("reading"));
+  const el=els[0]; if(!el)return;
+  const r=el.getBoundingClientRect(), h=window.innerHeight;
+  if(r.top<80||r.bottom>h-60) el.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+}
+function playQueue(list,from=0){queue=list;qi=from;next();}
+function next(){ if(qi>=queue.length){setPlaying(false);highlight(null);return;}
+  const k=qi++; highlight(k);
+  audio.src=clipUrl(queue[k]); audio.play().then(()=>setPlaying(true)).catch(()=>setPlaying(false)); }
 audio.addEventListener("ended",next);
-audio.addEventListener("error",()=>{ if(qi<queue.length) next(); else setPlaying(false); });
-function stop(){audio.pause();queue=[];setPlaying(false);}
+audio.addEventListener("error",()=>{ if(qi<queue.length) next(); else {setPlaying(false);highlight(null);} });
+function stop(){audio.pause();queue=[];setPlaying(false);highlight(null);}
 function setPlayIcon(on){const b=document.getElementById("play");if(!b)return;
   b.innerHTML=on?`<svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></svg>`
   :`<svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>`;
@@ -159,7 +171,19 @@ function mediaInfo(title){ try{ if(!("mediaSession" in navigator))return;
   navigator.mediaSession.metadata=new MediaMetadata({title,artist:"StoryWay Kids",album:ST?ST.title:"StoryWay Kids",artwork:[{src:"icon-512.png",sizes:"512x512",type:"image/png"}]});
   navigator.mediaSession.setActionHandler("play",()=>{audio.play().then(()=>setPlaying(true)).catch(()=>{})});
   navigator.mediaSession.setActionHandler("pause",()=>{audio.pause();setPlaying(false)}); }catch(e){} }
-function narrate(list,title){mediaInfo(title||"StoryWay Kids");current=list;stop();queue=current;if(S.auto)playQueue(list);}
+function narrate(title){mediaInfo(title||"StoryWay Kids");stop();current=Q;queue=current;if(S.auto)playQueue(current);}
+/* building narrated text: each call adds a clip to Q and tags its words with that clip's place */
+function q(clip){Q.push(clip);return Q.length-1;}
+const sp=o=>`<span class="s" data-q="${q(o.a)}">${esc(o.t)}</span>`;
+const at=clip=>`data-q="${q(clip)}"`;
+function para(p,cls,clip){ // p: list of sentences, or plain text read by one clip
+  if(typeof p==="string") return `<p class="${cls||""}"><span class="s" data-q="${q(clip)}">${esc(p)}</span></p>`;
+  return `<p class="${cls||""}">${p.map(sp).join(" ")}</p>`;
+}
+const isQuote=p=>(typeof p==="string"?p:p[0].t).startsWith('"');
+// tap any sentence to hear it from there
+app.addEventListener("click",e=>{const s=e.target.closest(".s");if(!s||!current.length)return;
+  playQueue(current,+s.dataset.q);});
 
 /* ---------- HOME / STORE ---------- */
 async function home(){
@@ -225,10 +249,14 @@ function go(id){
   if(id==="end")return ending();
   const n=ST.nodes[id];
   if(n.recap)return recap(n.to);
-  app.innerHTML=`${topBar()}${player()}
-   <div class="text">${n.text.map(p=>`<p class="${p.startsWith('"')?'say':''}">${esc(p)}</p>`).join("")}</div>
-   <div class="eyebrow">What will you do?</div>
-   <div class="choices">${n.choices.map((c,i)=>`<button class="choice" data-i="${i}"><b>${i+1}</b><span>${esc(c.t)}</span></button>`).join("")}</div>`;
+  Q=[];
+  const intro=(id===ST.start&&ST.startSay)?(q(ST.startSay.a),""):"";
+  const plain=typeof n.text[0]==="string";
+  const body=plain?`<div class="text" ${at("n_"+id)}>${n.text.map(p=>`<p class="${isQuote(p)?"say":""}">${esc(p)}</p>`).join("")}</div>`
+    :`<div class="text">${n.text.map(p=>para(p,isQuote(p)?"say":"")).join("")}</div>`;
+  const ask=n.ask?`<div class="eyebrow" ${at(n.ask.a)}>What will you do?</div>`:`<div class="eyebrow">What will you do?</div>`;
+  app.innerHTML=`${topBar()}${player()}${intro}${body}${ask}
+   <div class="choices">${n.choices.map((c,i)=>`<button class="choice" data-i="${i}" ${c.say?at(c.say.a):""}><b>${i+1}</b><span>${esc(c.t)}</span></button>`).join("")}</div>`;
   wire(n.ch);
   app.querySelectorAll(".choice").forEach(b=>b.onclick=()=>{
     const c=n.choices[+b.dataset.i];
@@ -237,34 +265,40 @@ function go(id){
     if(c.lesson) return lesson(n,c);
     go(c.to);
   });
-  narrate([`n_${id}`],n.ch);
+  narrate(n.ch);
 }
 function gains(c){return Object.entries(c.tr||{}).filter(([,v])=>v>0).map(([t,v])=>`+${v} ${t}`).join(" · ");}
 function lesson(n,c){
+  Q=[];
+  const L=c.lesson, sentenced=typeof L.text!=="string";
   app.innerHTML=`${topBar()}${player()}
    <div class="moment">
     <div class="eyebrow">What your choice shows</div>
-    <div class="lesson"><span class="tag">${esc(c.lesson.trait)}</span><p>${esc(c.lesson.text)}</p>
+    <div class="lesson"><span class="tag" ${sentenced?at(L.tagSay.a):""}>${esc(L.trait)}</span>${para(L.text,"","l_"+c.id)}
      <p class="note">${esc(gains(c))}</p></div>
-    <button class="primary" id="cont">Keep going →</button></div>`;
+    <button class="primary" id="cont" ${ST.keepSay?at(ST.keepSay.a):""}>Keep going →</button></div>`;
   wire(n.ch);
   document.getElementById("cont").onclick=()=>go(c.to);
-  narrate([`l_${c.id}`],c.lesson.trait);
+  narrate(L.trait);
 }
 function oops(id,n,c){
+  Q=[];
+  const sentenced=typeof c.think!=="string";
+  const cons=sentenced?c.consequence.map(p=>para(p)).join(""):`<p>${esc(c.consequence)}</p>`;
   app.innerHTML=`${topBar()}${player()}
    <div class="moment">
-    <div class="text"><p>${esc(c.consequence)}</p></div>
-    <div class="oops"><span class="tag">Let's think about that</span><p>${esc(c.think)}</p>
+    <div class="text" ${sentenced?"":at("w_"+c.id)}>${cons}</div>
+    <div class="oops"><span class="tag" ${sentenced?at(ST.thinkSay.a):""}>Let's think about that</span>${sentenced?para(c.think):`<p>${esc(c.think)}</p>`}
      <p class="note">Missed chance to show ${esc(c.missed)}</p></div>
-    <div class="btns">
+    <div class="btns" ${sentenced?at(ST.retrySay.a):""}>
      <button class="primary" id="retry">↺ Try that moment again</button>
      <button class="retry" id="cont">Keep going with this choice</button></div></div>`;
   wire(n.ch);
   document.getElementById("retry").onclick=()=>{S.retries++;go(id);};
   document.getElementById("cont").onclick=()=>{apply(c);S.rethink.push(c);go(c.to);};
-  narrate([`w_${c.id}`],"Let's think about that");
+  narrate("Let's think about that");
 }
+const plainText=x=>typeof x==="string"?x:x.map(o=>o.t).join(" ");
 function ranked(){return ST.traits.map(t=>[t,S.traits[t]]).sort((a,b)=>b[1]-a[1]);}
 function traitBars(){
   const max=Math.max(4,...Object.values(S.traits));
@@ -273,46 +307,48 @@ function traitBars(){
 }
 const storySoFar=()=>`<ol class="log">${S.log.map(l=>`<li>${esc(l)}</li>`).join("")}</ol>`;
 function recap(nextId){
+  Q=[];
   const t=ranked()[0][0];
   app.innerHTML=`${topBar()}${player()}
-   <div class="eyebrow">Who you're becoming</div>
-   <h2>${esc(S.name)}, you're growing in <span style="color:var(--accent)">${t}</span></h2>
-   <p class="lede">${esc(ST.bio[t])}</p>
+   <div class="eyebrow" ${at("common/recap_intro")}>Who you're becoming</div>
+   <h2 ${at("g_"+t)}>${esc(S.name)}, you're growing in <span style="color:var(--accent)">${t}</span></h2>
+   <p class="lede"><span class="s" ${at("b_"+t)}>${esc(ST.bio[t])}</span></p>
    <div class="card">${traitBars()}</div>
    <h3>Your story so far</h3>${storySoFar()}
-   <button class="primary" id="next">Keep going →</button>`;
+   <button class="primary" id="next" ${at("common/recap_outro")}>Keep going →</button>`;
   wire("Checkpoint");
   document.getElementById("next").onclick=()=>go(nextId);
-  narrate(["common/recap_intro","g_"+t,"b_"+t,"common/recap_outro"],"Checkpoint");
+  narrate("Checkpoint");
 }
 function endingParts(){ return ST.endings.map(g=>g.find(e=>!e.if||S.picks.includes(e.if))); }
 function ending(){
+  Q=[];
   const r=ranked(),t1=r[0][0],t2=r[1][0],parts=endingParts();
   const shown=r.filter(([,v])=>v>0).slice(0,3);
   app.innerHTML=`${topBar()}${player()}
-   <div class="text">${parts.map(e=>`<p>${esc(e.text)}</p>`).join("")}</div>
+   <div class="text">${parts.map(e=>para(e.text,"","e_"+e.id)).join("")}</div>
    <div class="card" style="display:flex;flex-direction:column;gap:14px">
     <div class="eyebrow">Who ${esc(S.name)} became</div>
-    <div><span class="badge">${esc(ST.endTitle[t1])}</span></div>
-    <p>${esc(ST.bio[t1])} ${esc(ST.bio[t2])}</p>
+    <div><span class="badge" ${at("t_"+t1)}>${esc(ST.endTitle[t1])}</span></div>
+    <p><span class="s" ${at("b_"+t1)}>${esc(ST.bio[t1])}</span> <span class="s" ${at("b_"+t2)}>${esc(ST.bio[t2])}</span></p>
     ${traitBars()}
    </div>
    <h2>What I learned</h2>
    <ul class="learned">
     ${shown.map(([t])=>`<li><strong>${t}:</strong> ${esc(ST.bio[t])}</li>`).join("")}
-    ${S.rethink.map(c=>`<li><strong>A moment to rethink:</strong> ${esc(c.log)}. ${esc(c.think)}</li>`).join("")}
+    ${S.rethink.map(c=>`<li><strong>A moment to rethink:</strong> ${esc(c.log)}. ${esc(plainText(c.think))}</li>`).join("")}
     ${S.retries?`<li><strong>You tried again ${S.retries} time${S.retries>1?"s":""}.</strong> Going back and making a better choice is exactly how people grow.</li>`:""}
    </ul>
    ${ST.talk?`<div class="talk"><div class="eyebrow">For grown-ups · Talk about it</div><ol>${ST.talk.map(q=>`<li>${esc(q)}</li>`).join("")}</ol></div>`:""}
    <h3>Your path</h3>${storySoFar()}
    <div class="choices">
-    <button class="primary" id="again">Play again and choose differently</button>
+    <button class="primary" id="again" ${at("common/the_end")}>Play again and choose differently</button>
     <button class="choice" id="other"><b>↺</b><span>Pick another story</span></button>
    </div>`;
   wire("The End");
   document.getElementById("again").onclick=()=>begin(ST.id);
   document.getElementById("other").onclick=home;
-  narrate([...parts.map(e=>"e_"+e.id),"t_"+t1,"b_"+t1,"b_"+t2,"common/the_end"],"The End");
+  narrate("The End");
 }
 let tt;
 function showToast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),1600);}
