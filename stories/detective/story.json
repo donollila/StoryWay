@@ -86,6 +86,10 @@
        "a": "x2aed5e510c"
       }
      },
+     "face": {
+      "who": "you",
+      "mood": "calm"
+     },
      "say": {
       "t": "Choice one: Search the classroom for clues.",
       "a": "x79216ace1a"
@@ -115,6 +119,10 @@
        "t": "Respect!",
        "a": "x2f70b181d9"
       }
+     },
+     "face": {
+      "who": "maya",
+      "mood": "happy"
      },
      "say": {
       "t": "Choice two: Ask your classmates what they saw.",
@@ -161,10 +169,20 @@
        "a": "x15c4f9b32e"
       }
      ],
+     "face": {
+      "who": "maya",
+      "mood": "crying"
+     },
      "say": {
       "t": "Choice three: Shout, \"Okay, who took Peanut?!\".",
       "a": "xe4da6cf8fc"
      }
+    }
+   ],
+   "faces": [
+    {
+     "who": "rivera",
+     "mood": "worried"
     }
    ],
    "ask": {
@@ -275,6 +293,12 @@
      }
     }
    ],
+   "faces": [
+    {
+     "who": "maya",
+     "mood": "worried"
+    }
+   ],
    "ask": {
     "t": "When you're ready, tap:",
     "a": "xa704599756"
@@ -330,6 +354,10 @@
        "a": "x3b4a92e9ca"
       }
      },
+     "face": {
+      "who": "leo",
+      "mood": "relieved"
+     },
      "say": {
       "t": "Choice one: Sit down and gently ask Leo what's wrong.",
       "a": "x08641fe5b1"
@@ -360,6 +388,10 @@
        "t": "Honesty!",
        "a": "xd83e254d53"
       }
+     },
+     "face": {
+      "who": "rivera",
+      "mood": "relieved"
      },
      "say": {
       "t": "Choice two: Go get Ms. Rivera.",
@@ -410,12 +442,47 @@
        "a": "x5fb361fbbd"
       }
      ],
+     "face": {
+      "who": "leo",
+      "mood": "distressed"
+     },
      "say": {
       "t": "Choice three: Point at Leo and say, \"You did it!\".",
       "a": "xed815e4831"
      }
     }
    ],
+   "faces": [
+    {
+     "who": "leo",
+     "mood": "crying"
+    }
+   ],
+   "feel": {
+    "who": "leo",
+    "mood": "crying",
+    "q": "How does Leo feel? Look at his face.",
+    "options": [
+     "Sad",
+     "Angry",
+     "Excited"
+    ],
+    "answer": "Sad",
+    "why": [
+     {
+      "t": "Yes, Leo feels sad.",
+      "a": "x9b13278dea"
+     },
+     {
+      "t": "His eyes are wet, his mouth turns down, and he's sitting all alone.",
+      "a": "x11e4dc7dc3"
+     }
+    ],
+    "qSay": {
+     "t": "How does Leo feel? Look at his face.",
+     "a": "xa2c417754c"
+    }
+   },
    "ask": {
     "t": "What will you do?",
     "a": "x90c3122a68"
@@ -498,6 +565,10 @@
        "a": "x26fe8ab26c"
       }
      },
+     "face": {
+      "who": "leo",
+      "mood": "relieved"
+     },
      "say": {
       "t": "Choice one: Tell Leo about a time you missed someone too.",
       "a": "x4bd66f963f"
@@ -527,6 +598,10 @@
        "t": "Courage!",
        "a": "xb799695b96"
       }
+     },
+     "face": {
+      "who": "leo",
+      "mood": "happy"
      },
      "say": {
       "t": "Choice two: Say, \"Come on, let's save Peanut together!\".",
@@ -573,12 +648,47 @@
        "a": "x79973cfc45"
       }
      ],
+     "face": {
+      "who": "leo",
+      "mood": "sad"
+     },
      "say": {
       "t": "Choice three: Say, \"You should have known better.\".",
       "a": "xbf246bb59a"
      }
     }
    ],
+   "faces": [
+    {
+     "who": "leo",
+     "mood": "scared"
+    }
+   ],
+   "feel": {
+    "who": "leo",
+    "mood": "scared",
+    "q": "How does Leo feel now? Look at his eyebrows and his mouth.",
+    "options": [
+     "Bored",
+     "Worried",
+     "Proud"
+    ],
+    "answer": "Worried",
+    "why": [
+     {
+      "t": "Yes, Leo feels worried.",
+      "a": "x0876e7f31a"
+     },
+     {
+      "t": "His eyebrows go up in the middle, and he's afraid of what everyone will think of him.",
+      "a": "xb80af2409b"
+     }
+    ],
+    "qSay": {
+     "t": "How does Leo feel now? Look at his eyebrows and his mouth.",
+     "a": "x3545045782"
+    }
+   },
    "ask": {
     "t": "What will you do?",
     "a": "x90c3122a68"
@@ -634,6 +744,10 @@
        "a": "x2aed5e510c"
       }
      },
+     "face": {
+      "who": "you",
+      "mood": "calm"
+     },
      "say": {
       "t": "Choice one: Lay out seeds and wait very quietly.",
       "a": "x164323928b"
@@ -663,6 +777,10 @@
        "t": "Respect!",
        "a": "x2f70b181d9"
       }
+     },
+     "face": {
+      "who": "kim",
+      "mood": "happy"
      },
      "say": {
       "t": "Choice two: Ask Mr. Kim the custodian for help.",
@@ -717,10 +835,20 @@
        "a": "x7ca6776d52"
       }
      ],
+     "face": {
+      "who": "you",
+      "mood": "surprised"
+     },
      "say": {
       "t": "Choice three: Bang on the vent to scare him out.",
       "a": "x5c9e33761e"
      }
+    }
+   ],
+   "faces": [
+    {
+     "who": "you",
+     "mood": "calm"
     }
    ],
    "ask": {
@@ -797,6 +925,10 @@
        "a": "xd83e254d53"
       }
      },
+     "face": {
+      "who": "leo",
+      "mood": "happy"
+     },
      "say": {
       "t": "Choice one: Offer to go with Leo so he can tell Ms. Rivera himself.",
       "a": "x89eb5c2d8d"
@@ -826,6 +958,10 @@
        "t": "Honesty!",
        "a": "xd83e254d53"
       }
+     },
+     "face": {
+      "who": "rivera",
+      "mood": "relieved"
      },
      "say": {
       "t": "Choice two: Tell Ms. Rivera what happened yourself.",
@@ -888,10 +1024,24 @@
        "a": "xc2b161505d"
       }
      ],
+     "face": {
+      "who": "you",
+      "mood": "worried"
+     },
      "say": {
       "t": "Choice three: Promise to keep the secret.",
       "a": "xd25babe957"
      }
+    }
+   ],
+   "faces": [
+    {
+     "who": "leo",
+     "mood": "worried"
+    },
+    {
+     "who": "you",
+     "mood": "happy"
     }
    ],
    "ask": {
@@ -1045,6 +1195,38 @@
   "Are some secrets okay to keep, and some not okay? What's the difference?",
   "Tell about a time someone showed you empathy. How did it feel?"
  ],
+ "cast": {
+  "leo": {
+   "name": "Leo",
+   "pron": "he"
+  },
+  "rivera": {
+   "name": "Ms. Rivera",
+   "pron": "she"
+  },
+  "maya": {
+   "name": "Maya",
+   "pron": "she"
+  },
+  "kim": {
+   "name": "Mr. Kim",
+   "pron": "he"
+  },
+  "you": {
+   "name": "You",
+   "pron": "you"
+  }
+ },
+ "endFaces": [
+  {
+   "who": "leo",
+   "mood": "happy"
+  },
+  {
+   "who": "you",
+   "mood": "happy"
+  }
+ ],
  "startSay": {
   "t": "The Case of the Missing Hamster.",
   "a": "x2d3895ce4b"
@@ -1056,6 +1238,10 @@
  "retrySay": {
   "t": "You can try that moment again, or keep going.",
   "a": "x20d3cee4e8"
+ },
+ "lookAgainSay": {
+  "t": "Look again. Check the eyes, the eyebrows, and the mouth.",
+  "a": "x810c298c52"
  },
  "keepSay": {
   "t": "Tap keep going when you're ready.",

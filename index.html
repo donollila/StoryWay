@@ -96,6 +96,24 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-of
 .note{font-size:.85rem;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
+
+/* faces */
+.faces{display:flex;gap:14px;flex-wrap:wrap}
+.face{margin:0;display:flex;flex-direction:column;align-items:center;gap:4px;width:96px}
+.face svg{width:84px;height:84px;background:var(--accent-soft);border-radius:50%}
+.face figcaption{font-size:.8rem;font-weight:700;color:var(--muted);text-align:center;line-height:1.2}
+.face.big{width:120px}.face.big svg{width:112px;height:112px}
+.with-face{display:flex;gap:14px;align-items:flex-start}
+.with-face>div{flex:1;min-width:0}
+.feel{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.feel .row{display:flex;gap:16px;align-items:center}
+.feel .q{font-family:var(--display);font-weight:800;font-size:1.25rem;line-height:1.2}
+.feel .opts{display:flex;gap:8px;flex-wrap:wrap}
+.feel .opts button{background:var(--accent-soft);color:var(--accent);border:2px solid transparent;border-radius:999px;padding:10px 18px;font-weight:800;font-size:1rem}
+.feel .opts button.right{background:var(--good);color:var(--card)}
+.feel .opts button.wrong{border-color:var(--bad);color:var(--bad);background:var(--card)}
+.feel .why{font-size:1.1rem;line-height:1.6}
+@media (max-width:420px){.with-face{flex-direction:column}.with-face .face{align-self:center}}
 /* lessons + store */
 .moment{display:flex;flex-direction:column;gap:16px}
 .lesson{background:var(--accent-soft);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:10px}
@@ -140,7 +158,7 @@ const getJSON=u=>fetch(u).then(r=>{if(!r.ok)throw new Error(u);return r.json()})
 /* ---------- AUDIO: a queue of clips, each tied to the words it reads ---------- */
 const audio=new Audio(); audio.preload="auto"; audio.setAttribute("playsinline","");
 try{ if(navigator.audioSession) navigator.audioSession.type="playback"; }catch(e){}
-let queue=[],qi=0,playing=false,current=[],Q=[];
+let queue=[],qi=0,playing=false,current=[],Q=[],limit=Infinity;
 const clipUrl=c=>c.startsWith("common/")?`audio/${c}.mp3`:`stories/${ST.id}/audio/${c}.mp3`;
 function setPlaying(on){playing=on;document.querySelector(".player")?.classList.toggle("speaking",on);setPlayIcon(on);}
 function highlight(k){
@@ -152,8 +170,8 @@ function highlight(k){
   if(r.top<80||r.bottom>h-60) el.scrollIntoView({block:"center",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
 }
 function playQueue(list,from=0){queue=list;qi=from;next();}
-function next(){ if(qi>=queue.length){setPlaying(false);highlight(null);return;}
-  const k=qi++; highlight(k);
+function next(){ if(qi>=queue.length||(queue===current&&qi>=limit)){setPlaying(false);highlight(null);return;}
+  const k=qi++; highlight(queue===current?k:null);
   audio.src=clipUrl(queue[k]); audio.play().then(()=>setPlaying(true)).catch(()=>setPlaying(false)); }
 audio.addEventListener("ended",next);
 audio.addEventListener("error",()=>{ if(qi<queue.length) next(); else {setPlaying(false);highlight(null);} });
@@ -171,7 +189,7 @@ function mediaInfo(title){ try{ if(!("mediaSession" in navigator))return;
   navigator.mediaSession.metadata=new MediaMetadata({title,artist:"StoryWay Kids",album:ST?ST.title:"StoryWay Kids",artwork:[{src:"icon-512.png",sizes:"512x512",type:"image/png"}]});
   navigator.mediaSession.setActionHandler("play",()=>{audio.play().then(()=>setPlaying(true)).catch(()=>{})});
   navigator.mediaSession.setActionHandler("pause",()=>{audio.pause();setPlaying(false)}); }catch(e){} }
-function narrate(title){mediaInfo(title||"StoryWay Kids");stop();current=Q;queue=current;if(S.auto)playQueue(current);}
+function narrate(title,gate){mediaInfo(title||"StoryWay Kids");stop();current=Q;queue=current;limit=gate??Infinity;if(S.auto)playQueue(current);}
 /* building narrated text: each call adds a clip to Q and tags its words with that clip's place */
 function q(clip){Q.push(clip);return Q.length-1;}
 const sp=o=>`<span class="s" data-q="${q(o.a)}">${esc(o.t)}</span>`;
@@ -184,6 +202,72 @@ const isQuote=p=>(typeof p==="string"?p:p[0].t).startsWith('"');
 // tap any sentence to hear it from there
 app.addEventListener("click",e=>{const s=e.target.closest(".s");if(!s||!current.length)return;
   playQueue(current,+s.dataset.q);});
+
+/* ---------- FACES: one drawing style, a look per character, a set of expressions ---------- */
+const LOOKS={
+  leo:{skin:"#C68A5C",hair:"#2B1B12",style:"curly"},
+  rivera:{skin:"#E3B48A",hair:"#5A2E1A",style:"bun",glasses:true},
+  maya:{skin:"#F2CFA8",hair:"#C2742E",style:"pigtails"},
+  kim:{skin:"#EBC49B",hair:"#5B5B5B",style:"short",mustache:true},
+  you:{skin:"#D9A07A",hair:"#4A3020",style:"cap"}
+};
+const MOODS={ // word shown under the face, and how each feature is drawn
+  happy:{word:"happy",brow:"up",eyes:"dot",mouth:"grin",cheeks:true},
+  relieved:{word:"relieved",brow:"soft",eyes:"closed",mouth:"smile",cheeks:true},
+  calm:{word:"calm",brow:"flat",eyes:"dot",mouth:"smile"},
+  sad:{word:"sad",brow:"sad",eyes:"dot",mouth:"frown"},
+  crying:{word:"sad",brow:"sad",eyes:"dot",mouth:"frown",tears:true},
+  worried:{word:"worried",brow:"sad",eyes:"dot",mouth:"wavy",sweat:true},
+  scared:{word:"worried",brow:"sadStrong",eyes:"wide",mouth:"wavy",sweat:true},
+  distressed:{word:"upset",brow:"sadStrong",eyes:"wide",mouth:"open",tears:true},
+  surprised:{word:"surprised",brow:"high",eyes:"wide",mouth:"o"}
+};
+function faceSVG(who,mood){
+  const L=LOOKS[who]||LOOKS.you, M=MOODS[mood]||MOODS.calm, ink="#3B2A20";
+  const back={
+    bun:`<circle cx="60" cy="20" r="14" fill="${L.hair}"/>`,
+    pigtails:`<circle cx="18" cy="56" r="13" fill="${L.hair}"/><circle cx="102" cy="56" r="13" fill="${L.hair}"/>`
+  }[L.style]||"";
+  const front={
+    curly:[30,42,54,66,78,90].map((x,i)=>`<circle cx="${x}" cy="${i%2?26:30}" r="11" fill="${L.hair}"/>`).join("")+`<circle cx="24" cy="44" r="9" fill="${L.hair}"/><circle cx="96" cy="44" r="9" fill="${L.hair}"/>`,
+    bun:`<path d="M22 58 Q22 22 60 24 Q98 22 98 58 Q90 38 60 36 Q30 38 22 58Z" fill="${L.hair}"/>`,
+    pigtails:`<path d="M22 54 Q24 22 60 24 Q96 22 98 54 Q84 34 62 40 Q44 34 22 54Z" fill="${L.hair}"/>`,
+    short:`<path d="M24 50 Q26 24 60 24 Q94 24 96 50 Q80 36 60 36 Q40 36 24 50Z" fill="${L.hair}"/>`,
+    cap:`<path d="M24 50 Q26 20 60 20 Q94 20 96 50Z" fill="var(--accent)"/><path d="M60 46 Q92 44 112 52 Q92 56 60 52Z" fill="var(--accent)"/><circle cx="60" cy="21" r="4" fill="var(--sun)"/>`
+  }[L.style]||"";
+  const brows={
+    flat:[[40,50,52,50],[68,50,80,50]], up:[[40,48,52,46],[68,46,80,48]], soft:[[40,50,52,47],[68,47,80,50]],
+    sad:[[40,50,52,45],[68,45,80,50]], sadStrong:[[40,51,52,42],[68,42,80,51]], high:[[40,42,52,40],[68,40,80,42]]
+  }[M.brow].map(([a,b,c,d])=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="${ink}" stroke-width="3.5" stroke-linecap="round"/>`).join("");
+  const eyes={
+    dot:`<circle cx="46" cy="62" r="4.5" fill="${ink}"/><circle cx="74" cy="62" r="4.5" fill="${ink}"/>`,
+    closed:`<path d="M40 63 Q46 57 52 63 M68 63 Q74 57 80 63" fill="none" stroke="${ink}" stroke-width="3.5" stroke-linecap="round"/>`,
+    wide:`<circle cx="46" cy="62" r="7.5" fill="#fff" stroke="${ink}" stroke-width="2"/><circle cx="74" cy="62" r="7.5" fill="#fff" stroke="${ink}" stroke-width="2"/><circle cx="46" cy="63" r="3.5" fill="${ink}"/><circle cx="74" cy="63" r="3.5" fill="${ink}"/>`
+  }[M.eyes];
+  const mouth={
+    grin:`<path d="M44 80 Q60 98 76 80 Z" fill="#8E3B3B" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>`,
+    smile:`<path d="M47 82 Q60 92 73 82" fill="none" stroke="${ink}" stroke-width="3.5" stroke-linecap="round"/>`,
+    frown:`<path d="M47 90 Q60 79 73 90" fill="none" stroke="${ink}" stroke-width="3.5" stroke-linecap="round"/>`,
+    wavy:`<path d="M46 86 Q51 81 56 86 T66 86 T76 86" fill="none" stroke="${ink}" stroke-width="3.5" stroke-linecap="round"/>`,
+    open:`<ellipse cx="60" cy="88" rx="9" ry="7" fill="#8E3B3B" stroke="${ink}" stroke-width="3"/>`,
+    o:`<ellipse cx="60" cy="86" rx="6" ry="7.5" fill="#8E3B3B" stroke="${ink}" stroke-width="3"/>`
+  }[M.mouth];
+  const extra=(M.cheeks?`<circle cx="36" cy="76" r="6" fill="#F08A8A" opacity=".45"/><circle cx="84" cy="76" r="6" fill="#F08A8A" opacity=".45"/>`:"")
+    +(M.tears?`<path d="M44 70 Q40 80 44 84 Q48 80 44 70Z" fill="#6BB5E8"/><path d="M76 70 Q72 80 76 84 Q80 80 76 70Z" fill="#6BB5E8"/>`:"")
+    +(M.sweat?`<path d="M92 40 Q87 50 92 54 Q97 50 92 40Z" fill="#6BB5E8"/>`:"")
+    +(L.glasses?`<circle cx="46" cy="62" r="10" fill="none" stroke="${ink}" stroke-width="2.5"/><circle cx="74" cy="62" r="10" fill="none" stroke="${ink}" stroke-width="2.5"/><line x1="56" y1="62" x2="64" y2="62" stroke="${ink}" stroke-width="2.5"/>`:"")
+    +(L.mustache?`<path d="M48 77 Q54 72 60 76 Q66 72 72 77 Q66 79 60 78 Q54 79 48 77Z" fill="${L.hair}"/>`:"");
+  return `<svg viewBox="0 0 120 120" role="img" aria-hidden="true">${back}
+    <circle cx="22" cy="66" r="6" fill="${L.skin}" stroke="${ink}" stroke-width="2.5"/><circle cx="98" cy="66" r="6" fill="${L.skin}" stroke="${ink}" stroke-width="2.5"/>
+    <circle cx="60" cy="64" r="38" fill="${L.skin}" stroke="${ink}" stroke-width="2.5"/>
+    ${front}${brows}${eyes}${mouth}${extra}</svg>`;
+}
+function feelLine(who,mood){
+  const c=(ST&&ST.cast&&ST.cast[who])||{name:who,pron:"they"}, w=(MOODS[mood]||MOODS.calm).word;
+  return who==="you"?`You feel ${w}`:`${c.name} feels ${w}`;
+}
+const faceFig=(f,size,noCaption)=>f?`<figure class="face ${size||""}">${faceSVG(f.who,f.mood)}${noCaption?"":`<figcaption>${esc(feelLine(f.who,f.mood))}</figcaption>`}</figure>`:"";
+const faceRow=list=>list&&list.length?`<div class="faces">${list.map(f=>faceFig(f)).join("")}</div>`:"";
 
 /* ---------- HOME / STORE ---------- */
 async function home(){
@@ -229,7 +313,7 @@ async function begin(id){
   // start audio inside the tap so iPhone allows narration
   try{audio.src="audio/common/recap_intro.mp3";audio.muted=true;audio.play().then(()=>{audio.pause();audio.muted=false}).catch(()=>{audio.muted=false})}catch(e){}
   try{ ST=await getJSON(`stories/${id}/story.json`); }catch(e){ app.innerHTML=`<p class="loading">Couldn't open that story. Check your connection and try again.</p>`; return; }
-  S.traits=Object.fromEntries(ST.traits.map(t=>[t,0])); S.log=[]; S.picks=[]; S.rethink=[]; S.retries=0;
+  S.traits=Object.fromEntries(ST.traits.map(t=>[t,0])); S.log=[]; S.picks=[]; S.rethink=[]; S.retries=0; S.feelRight=0;
   go(ST.start);
 }
 function topBar(){return`<div class="top"><button class="link" id="back">← Stories</button><span class="chap" id="chap"></span></div>`;}
@@ -254,9 +338,19 @@ function go(id){
   const plain=typeof n.text[0]==="string";
   const body=plain?`<div class="text" ${at("n_"+id)}>${n.text.map(p=>`<p class="${isQuote(p)?"say":""}">${esc(p)}</p>`).join("")}</div>`
     :`<div class="text">${n.text.map(p=>para(p,isQuote(p)?"say":"")).join("")}</div>`;
+  const f=n.feel;
+  let feel="", gate=null, whyAt=null;
+  if(f){
+    const qi=q(f.qSay.a); gate=qi+1;
+    whyAt=Q.length;
+    feel=`<div class="feel" id="feel"><div class="row">${faceFig({who:f.who,mood:f.mood},"big",true)}
+      <div><div class="eyebrow">Feelings check</div><div class="q"><span class="s" data-q="${qi}">${esc(f.q)}</span></div></div></div>
+      <div class="opts">${f.options.map(o=>`<button data-o="${esc(o)}">${esc(o)}</button>`).join("")}</div>
+      <div class="why" id="why" hidden>${para(f.why)}</div></div>`;
+  }
   const ask=n.ask?`<div class="eyebrow" ${at(n.ask.a)}>What will you do?</div>`:`<div class="eyebrow">What will you do?</div>`;
-  app.innerHTML=`${topBar()}${player()}${intro}${body}${ask}
-   <div class="choices">${n.choices.map((c,i)=>`<button class="choice" data-i="${i}" ${c.say?at(c.say.a):""}><b>${i+1}</b><span>${esc(c.t)}</span></button>`).join("")}</div>`;
+  const choices=`<div class="choices">${n.choices.map((c,i)=>`<button class="choice" data-i="${i}" ${c.say?at(c.say.a):""}><b>${i+1}</b><span>${esc(c.t)}</span></button>`).join("")}</div>`;
+  app.innerHTML=`${topBar()}${player()}${intro}${f?"":faceRow(n.faces)}${body}${feel}<div id="decide" ${f?"hidden":""}>${ask}${choices}</div>`;
   wire(n.ch);
   app.querySelectorAll(".choice").forEach(b=>b.onclick=()=>{
     const c=n.choices[+b.dataset.i];
@@ -265,7 +359,20 @@ function go(id){
     if(c.lesson) return lesson(n,c);
     go(c.to);
   });
-  narrate(n.ch);
+  if(f){
+    app.querySelectorAll(".feel .opts button").forEach(b=>b.onclick=()=>{
+      if(b.dataset.o===f.answer){
+        b.classList.add("right"); app.querySelectorAll(".feel .opts button").forEach(x=>x.disabled=true);
+        document.getElementById("why").hidden=false; document.getElementById("decide").hidden=false;
+        limit=Infinity; S.feelRight=(S.feelRight||0)+1;
+        playQueue(current,whyAt);
+      } else {
+        b.classList.add("wrong"); b.disabled=true;
+        audio.pause(); queue=[ST.lookAgainSay.a]; qi=0; next();
+      }
+    });
+  }
+  narrate(n.ch,gate);
 }
 function gains(c){return Object.entries(c.tr||{}).filter(([,v])=>v>0).map(([t,v])=>`+${v} ${t}`).join(" · ");}
 function lesson(n,c){
@@ -274,8 +381,8 @@ function lesson(n,c){
   app.innerHTML=`${topBar()}${player()}
    <div class="moment">
     <div class="eyebrow">What your choice shows</div>
-    <div class="lesson"><span class="tag" ${sentenced?at(L.tagSay.a):""}>${esc(L.trait)}</span>${para(L.text,"","l_"+c.id)}
-     <p class="note">${esc(gains(c))}</p></div>
+    <div class="lesson with-face">${faceFig(c.face)}<div style="display:flex;flex-direction:column;gap:10px"><span class="tag" ${sentenced?at(L.tagSay.a):""}>${esc(L.trait)}</span>${para(L.text,"","l_"+c.id)}
+     <p class="note">${esc(gains(c))}</p></div></div>
     <button class="primary" id="cont" ${ST.keepSay?at(ST.keepSay.a):""}>Keep going →</button></div>`;
   wire(n.ch);
   document.getElementById("cont").onclick=()=>go(c.to);
@@ -287,7 +394,7 @@ function oops(id,n,c){
   const cons=sentenced?c.consequence.map(p=>para(p)).join(""):`<p>${esc(c.consequence)}</p>`;
   app.innerHTML=`${topBar()}${player()}
    <div class="moment">
-    <div class="text" ${sentenced?"":at("w_"+c.id)}>${cons}</div>
+    <div class="with-face">${faceFig(c.face,"big")}<div class="text" ${sentenced?"":at("w_"+c.id)}>${cons}</div></div>
     <div class="oops"><span class="tag" ${sentenced?at(ST.thinkSay.a):""}>Let's think about that</span>${sentenced?para(c.think):`<p>${esc(c.think)}</p>`}
      <p class="note">Missed chance to show ${esc(c.missed)}</p></div>
     <div class="btns" ${sentenced?at(ST.retrySay.a):""}>
@@ -326,6 +433,7 @@ function ending(){
   const r=ranked(),t1=r[0][0],t2=r[1][0],parts=endingParts();
   const shown=r.filter(([,v])=>v>0).slice(0,3);
   app.innerHTML=`${topBar()}${player()}
+   ${faceRow(ST.endFaces)}
    <div class="text">${parts.map(e=>para(e.text,"","e_"+e.id)).join("")}</div>
    <div class="card" style="display:flex;flex-direction:column;gap:14px">
     <div class="eyebrow">Who ${esc(S.name)} became</div>
@@ -337,6 +445,7 @@ function ending(){
    <ul class="learned">
     ${shown.map(([t])=>`<li><strong>${t}:</strong> ${esc(ST.bio[t])}</li>`).join("")}
     ${S.rethink.map(c=>`<li><strong>A moment to rethink:</strong> ${esc(c.log)}. ${esc(plainText(c.think))}</li>`).join("")}
+    ${S.feelRight?`<li><strong>Feelings detective:</strong> you read how someone felt ${S.feelRight} time${S.feelRight>1?"s":""} by looking at their face.</li>`:""}
     ${S.retries?`<li><strong>You tried again ${S.retries} time${S.retries>1?"s":""}.</strong> Going back and making a better choice is exactly how people grow.</li>`:""}
    </ul>
    ${ST.talk?`<div class="talk"><div class="eyebrow">For grown-ups · Talk about it</div><ol>${ST.talk.map(q=>`<li>${esc(q)}</li>`).join("")}</ol></div>`:""}
