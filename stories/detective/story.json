@@ -1,10 +1,10 @@
 {
  "id": "detective",
- "title": "The Case of the Missing Hamster",
+ "title": "The Case of the Missing {Kind}",
  "kind": "Kid detective",
  "age": "Ages 6–10 · about 15 minutes",
  "start": "d1",
- "intro": "The Case of the Missing Hamster.",
+ "intro": "The Case of the Missing {Kind}.",
  "traits": [
   "Empathy",
   "Honesty",
@@ -23,28 +23,96 @@
  },
  "nodes": {
   "d1": {
-   "ch": "Chapter 1 · The empty cage",
+   "ch": "Chapter 1 · The open door",
    "text": [
-    [
-     {
-      "t": "It's Monday morning at Maple Street School.",
-      "a": "x0229009517"
-     },
-     {
-      "t": "You walk into Room 12, and you stop.",
-      "a": "xc1e1fccef1"
-     },
-     {
-      "t": "The door of the hamster cage is wide open.",
-      "a": "x6410c09215"
+    {
+     "v": {
+      "hamster": [
+       {
+        "t": "It's Monday morning at Maple Street School.",
+        "a": "x0229009517"
+       },
+       {
+        "t": "You walk into Room 12, and you stop.",
+        "a": "xc1e1fccef1"
+       },
+       {
+        "t": "The door of the hamster cage is wide open.",
+        "a": "x6410c09215"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "It's Monday morning at Maple Street School.",
+        "a": "x0229009517"
+       },
+       {
+        "t": "You walk into Room 12, and you stop.",
+        "a": "xc1e1fccef1"
+       },
+       {
+        "t": "The door of the puppy pen is wide open.",
+        "a": "x1b93656ade"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "It's Monday morning at Maple Street School.",
+        "a": "x0229009517"
+       },
+       {
+        "t": "You walk into Room 12, and you stop.",
+        "a": "xc1e1fccef1"
+       },
+       {
+        "t": "The door of the kitten pen is wide open.",
+        "a": "xe619b99c11"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "It's Monday morning at Maple Street School.",
+        "a": "x0229009517"
+       },
+       {
+        "t": "You walk into Room 12, and you stop.",
+        "a": "xc1e1fccef1"
+       },
+       {
+        "t": "The door of the baby dinosaur pen is wide open.",
+        "a": "xdd727dc71e"
+       }
+      ]
      }
-    ],
-    [
-     {
-      "t": "Peanut, the class hamster, is gone!",
-      "a": "x80f897081d"
+    },
+    {
+     "v": {
+      "hamster": [
+       {
+        "t": "Peanut, the class hamster, is gone!",
+        "a": "x80f897081d"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "Biscuit, the class puppy, is gone!",
+        "a": "xf573c3ca7b"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "Mittens, the class kitten, is gone!",
+        "a": "x8c75780f5f"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "Rex, the class baby dinosaur, is gone!",
+        "a": "x74ebd6d82b"
+       }
+      ]
      }
-    ],
+    },
     [
      {
       "t": "Ms. Rivera looks worried.",
@@ -131,7 +199,7 @@
     },
     {
      "id": "shout",
-     "t": "Shout, \"Okay, who took Peanut?!\"",
+     "t": "Shout, \"Okay, who took {Name}?!\"",
      "to": "d2b",
      "tr": {
       "Respect": -1
@@ -174,8 +242,24 @@
       "mood": "crying"
      },
      "say": {
-      "t": "Choice three: Shout, \"Okay, who took Peanut?!\".",
-      "a": "xe4da6cf8fc"
+      "v": {
+       "hamster": {
+        "t": "Choice three: Shout, \"Okay, who took Peanut?!\".",
+        "a": "xe4da6cf8fc"
+       },
+       "puppy": {
+        "t": "Choice three: Shout, \"Okay, who took Biscuit?!\".",
+        "a": "xea05053f5b"
+       },
+       "kitten": {
+        "t": "Choice three: Shout, \"Okay, who took Mittens?!\".",
+        "a": "xe12be80d8f"
+       },
+       "dinosaur": {
+        "t": "Choice three: Shout, \"Okay, who took Rex?!\".",
+        "a": "x0115eb52c4"
+       }
+      }
      }
     }
    ],
@@ -193,36 +277,116 @@
   "d2a": {
    "ch": "Chapter 2 · The clue trail",
    "text": [
-    [
-     {
-      "t": "You get down on your hands and knees.",
-      "a": "x1a7d701263"
-     },
-     {
-      "t": "Under the reading rug, there's a tiny trail of sunflower seeds.",
-      "a": "xdff543dac1"
+    {
+     "v": {
+      "hamster": [
+       {
+        "t": "You get down on your hands and knees.",
+        "a": "x1a7d701263"
+       },
+       {
+        "t": "Under the reading rug, there's a tiny trail of sunflower seeds.",
+        "a": "xdff543dac1"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "You get down on your hands and knees.",
+        "a": "x1a7d701263"
+       },
+       {
+        "t": "Under the reading rug, there's a tiny trail of dog treats.",
+        "a": "x0471bc2176"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "You get down on your hands and knees.",
+        "a": "x1a7d701263"
+       },
+       {
+        "t": "Under the reading rug, there's a tiny trail of kitty treats.",
+        "a": "x774ca9b609"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "You get down on your hands and knees.",
+        "a": "x1a7d701263"
+       },
+       {
+        "t": "Under the reading rug, there's a tiny trail of lettuce leaves.",
+        "a": "x68c34c37ae"
+       }
+      ]
      }
-    ],
+    },
     [
      {
       "t": "The trail leads past the bookshelf, out the door, and toward the hallway lockers.",
       "a": "x19211ae94c"
      }
     ],
-    [
-     {
-      "t": "Next to the very last seed is a shiny dinosaur sticker.",
-      "a": "x37117f13d9"
-     },
-     {
-      "t": "Only one kid in class has dinosaur stickers.",
-      "a": "xfa34338619"
-     },
-     {
-      "t": "Leo.",
-      "a": "x3682c54459"
+    {
+     "v": {
+      "hamster": [
+       {
+        "t": "Next to the very last seed is a shiny dinosaur sticker.",
+        "a": "x37117f13d9"
+       },
+       {
+        "t": "Only one kid in class has dinosaur stickers.",
+        "a": "xfa34338619"
+       },
+       {
+        "t": "Leo.",
+        "a": "x3682c54459"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "Next to the very last treat is a shiny dinosaur sticker.",
+        "a": "x696e85f485"
+       },
+       {
+        "t": "Only one kid in class has dinosaur stickers.",
+        "a": "xfa34338619"
+       },
+       {
+        "t": "Leo.",
+        "a": "x3682c54459"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "Next to the very last treat is a shiny dinosaur sticker.",
+        "a": "x696e85f485"
+       },
+       {
+        "t": "Only one kid in class has dinosaur stickers.",
+        "a": "xfa34338619"
+       },
+       {
+        "t": "Leo.",
+        "a": "x3682c54459"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "Next to the very last leaf is a shiny dinosaur sticker.",
+        "a": "xdd9d69c010"
+       },
+       {
+        "t": "Only one kid in class has dinosaur stickers.",
+        "a": "xfa34338619"
+       },
+       {
+        "t": "Leo.",
+        "a": "x3682c54459"
+       }
+      ]
      }
-    ]
+    }
    ],
    "choices": [
     {
@@ -230,7 +394,7 @@
      "t": "Follow the trail to the lockers",
      "to": "d3",
      "tr": {},
-     "log": "You followed the seed trail",
+     "log": "You followed the {food1} trail",
      "say": {
       "t": "Follow the trail to the lockers.",
       "a": "x045a3294ef"
@@ -245,20 +409,66 @@
   "d2b": {
    "ch": "Chapter 2 · The witnesses",
    "text": [
-    [
-     {
-      "t": "Maya raises her hand.",
-      "a": "x80a898b9ae"
-     },
-     {
-      "t": "\"I saw Leo by the cage before the bell.",
-      "a": "x06aa9f6b1e"
-     },
-     {
-      "t": "He looked sad.\"",
-      "a": "xf2828ffd99"
+    {
+     "v": {
+      "hamster": [
+       {
+        "t": "Maya raises her hand.",
+        "a": "x80a898b9ae"
+       },
+       {
+        "t": "\"I saw Leo by the cage before the bell.",
+        "a": "x06aa9f6b1e"
+       },
+       {
+        "t": "He looked sad.\"",
+        "a": "xf2828ffd99"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "Maya raises her hand.",
+        "a": "x80a898b9ae"
+       },
+       {
+        "t": "\"I saw Leo by the pen before the bell.",
+        "a": "x46d02f8728"
+       },
+       {
+        "t": "He looked sad.\"",
+        "a": "xf2828ffd99"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "Maya raises her hand.",
+        "a": "x80a898b9ae"
+       },
+       {
+        "t": "\"I saw Leo by the pen before the bell.",
+        "a": "x46d02f8728"
+       },
+       {
+        "t": "He looked sad.\"",
+        "a": "xf2828ffd99"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "Maya raises her hand.",
+        "a": "x80a898b9ae"
+       },
+       {
+        "t": "\"I saw Leo by the pen before the bell.",
+        "a": "x46d02f8728"
+       },
+       {
+        "t": "He looked sad.\"",
+        "a": "xf2828ffd99"
+       }
+      ]
      }
-    ],
+    },
     [
      {
       "t": "Jordan adds, \"He went toward the lockers.",
@@ -307,16 +517,50 @@
   "d3": {
    "ch": "Chapter 2 · Leo",
    "text": [
-    [
-     {
-      "t": "By the lockers, Leo is sitting on the floor.",
-      "a": "x6986ba6505"
-     },
-     {
-      "t": "His eyes are red, and he's holding an empty bag of sunflower seeds.",
-      "a": "x25917906b9"
+    {
+     "v": {
+      "hamster": [
+       {
+        "t": "By the lockers, Leo is sitting on the floor.",
+        "a": "x6986ba6505"
+       },
+       {
+        "t": "His eyes are red, and he's holding an empty bag of sunflower seeds.",
+        "a": "x25917906b9"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "By the lockers, Leo is sitting on the floor.",
+        "a": "x6986ba6505"
+       },
+       {
+        "t": "His eyes are red, and he's holding an empty bag of dog treats.",
+        "a": "x50551845fb"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "By the lockers, Leo is sitting on the floor.",
+        "a": "x6986ba6505"
+       },
+       {
+        "t": "His eyes are red, and he's holding an empty bag of kitty treats.",
+        "a": "x00ca1c871e"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "By the lockers, Leo is sitting on the floor.",
+        "a": "x6986ba6505"
+       },
+       {
+        "t": "His eyes are red, and he's holding an empty bag of lettuce leaves.",
+        "a": "x48caab5a3a"
+       }
+      ]
      }
-    ],
+    },
     [
      {
       "t": "Other kids start to gather around and whisper.",
@@ -495,34 +739,126 @@
   "d4": {
    "ch": "Chapter 3 · The truth",
    "text": [
-    [
-     {
-      "t": "Leo sniffles, and finally starts talking.",
-      "a": "x836b9af5a0"
-     },
-     {
-      "t": "\"I just wanted to hold Peanut.",
-      "a": "x4542945138"
-     },
-     {
-      "t": "I miss my dog so much.",
-      "a": "xe89ce098d3"
-     },
-     {
-      "t": "He moved away with my grandma.\"",
-      "a": "x5257a6b53f"
+    {
+     "v": {
+      "hamster": [
+       {
+        "t": "Leo sniffles, and finally starts talking.",
+        "a": "x836b9af5a0"
+       },
+       {
+        "t": "\"I just wanted to hold Peanut.",
+        "a": "x4542945138"
+       },
+       {
+        "t": "I miss my dog so much.",
+        "a": "xe89ce098d3"
+       },
+       {
+        "t": "He moved away with my grandma.\"",
+        "a": "x5257a6b53f"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "Leo sniffles, and finally starts talking.",
+        "a": "x836b9af5a0"
+       },
+       {
+        "t": "\"I just wanted to hold Biscuit.",
+        "a": "xc4d9f1aeb9"
+       },
+       {
+        "t": "I miss my dog so much.",
+        "a": "xe89ce098d3"
+       },
+       {
+        "t": "He moved away with my grandma.\"",
+        "a": "x5257a6b53f"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "Leo sniffles, and finally starts talking.",
+        "a": "x836b9af5a0"
+       },
+       {
+        "t": "\"I just wanted to hold Mittens.",
+        "a": "x8ee0ea363b"
+       },
+       {
+        "t": "I miss my dog so much.",
+        "a": "xe89ce098d3"
+       },
+       {
+        "t": "He moved away with my grandma.\"",
+        "a": "x5257a6b53f"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "Leo sniffles, and finally starts talking.",
+        "a": "x836b9af5a0"
+       },
+       {
+        "t": "\"I just wanted to hold Rex.",
+        "a": "x9227ac7e3b"
+       },
+       {
+        "t": "I miss my dog so much.",
+        "a": "xe89ce098d3"
+       },
+       {
+        "t": "He moved away with my grandma.\"",
+        "a": "x5257a6b53f"
+       }
+      ]
      }
-    ],
-    [
-     {
-      "t": "\"I opened the cage, and Peanut ran.",
-      "a": "xb20b6599d4"
-     },
-     {
-      "t": "He went into the heater vent!\"",
-      "a": "x88ba8997c4"
+    },
+    {
+     "v": {
+      "hamster": [
+       {
+        "t": "\"I opened the cage, and Peanut ran.",
+        "a": "xb20b6599d4"
+       },
+       {
+        "t": "He went into the heater vent!\"",
+        "a": "x88ba8997c4"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "\"I opened the pen, and Biscuit ran.",
+        "a": "x1e9115e8f9"
+       },
+       {
+        "t": "He went into the supply closet!\"",
+        "a": "x3311a2d0e5"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "\"I opened the pen, and Mittens ran.",
+        "a": "xfc78a53134"
+       },
+       {
+        "t": "He went behind the big bookshelf!\"",
+        "a": "x6462a9408e"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "\"I opened the pen, and Rex ran.",
+        "a": "x6dafded801"
+       },
+       {
+        "t": "He went into the art cabinet!\"",
+        "a": "x13a83be5b7"
+       }
+      ]
      }
-    ],
+    },
     [
      {
       "t": "Leo wipes his eyes.",
@@ -576,12 +912,12 @@
     },
     {
      "id": "together",
-     "t": "Say, \"Come on, let's save Peanut together!\"",
+     "t": "Say, \"Come on, let's save {Name} together!\"",
      "to": "d5",
      "tr": {
       "Courage": 2
      },
-     "log": "You and Leo teamed up to save Peanut",
+     "log": "You and Leo teamed up to save {Name}",
      "lesson": {
       "trait": "Courage",
       "text": [
@@ -604,8 +940,24 @@
       "mood": "happy"
      },
      "say": {
-      "t": "Choice two: Say, \"Come on, let's save Peanut together!\".",
-      "a": "xfde2ce7e37"
+      "v": {
+       "hamster": {
+        "t": "Choice two: Say, \"Come on, let's save Peanut together!\".",
+        "a": "xfde2ce7e37"
+       },
+       "puppy": {
+        "t": "Choice two: Say, \"Come on, let's save Biscuit together!\".",
+        "a": "xe93050f33d"
+       },
+       "kitten": {
+        "t": "Choice two: Say, \"Come on, let's save Mittens together!\".",
+        "a": "x821db22773"
+       },
+       "dinosaur": {
+        "t": "Choice two: Say, \"Come on, let's save Rex together!\".",
+        "a": "xc036981c2c"
+       }
+      }
      }
     },
     {
@@ -695,50 +1047,152 @@
    }
   },
   "d5": {
-   "ch": "Chapter 3 · The vent",
+   "ch": "Chapter 3 · The hiding spot",
    "text": [
-    [
-     {
-      "t": "You kneel down by the heater vent and listen.",
-      "a": "x25797693f5"
-     },
-     {
-      "t": "From inside the wall comes a tiny squeak.",
-      "a": "xa4c44a9107"
+    {
+     "v": {
+      "hamster": [
+       {
+        "t": "You kneel down by the heater vent and listen.",
+        "a": "x25797693f5"
+       },
+       {
+        "t": "From inside the wall comes a tiny squeak.",
+        "a": "xa4c44a9107"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "You kneel down by the supply closet and listen.",
+        "a": "x52b4f25371"
+       },
+       {
+        "t": "From inside the closet comes a tiny whimper.",
+        "a": "x41cccb7eeb"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "You kneel down by the big bookshelf and listen.",
+        "a": "xc11431964a"
+       },
+       {
+        "t": "From behind the bookshelf comes a tiny meow.",
+        "a": "x703cc860f4"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "You kneel down by the art cabinet and listen.",
+        "a": "x6923c56045"
+       },
+       {
+        "t": "From inside the cabinet comes a tiny chirp.",
+        "a": "x87503d7c55"
+       }
+      ]
      }
-    ],
-    [
-     {
-      "t": "Peanut is in there, and he sounds scared.",
-      "a": "x342c49799c"
+    },
+    {
+     "v": {
+      "hamster": [
+       {
+        "t": "Peanut is in there, and he sounds scared.",
+        "a": "x342c49799c"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "Biscuit is in there, and he sounds scared.",
+        "a": "x55bbd6cf94"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "Mittens is in there, and he sounds scared.",
+        "a": "x5df9b7d37b"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "Rex is in there, and he sounds scared.",
+        "a": "xc00e933fa2"
+       }
+      ]
      }
-    ]
+    }
    ],
    "choices": [
     {
      "id": "wait",
-     "t": "Lay out seeds and wait very quietly",
+     "t": "Lay out {food} and wait very quietly",
      "to": "d6",
      "tr": {
       "Patience": 2
      },
-     "log": "You waited quietly with seeds",
+     "log": "You waited quietly with {food}",
      "lesson": {
       "trait": "Patience",
-      "text": [
-       {
-        "t": "You let Peanut come out when he felt safe.",
-        "a": "xbd818fa7d7"
-       },
-       {
-        "t": "Rushing would have scared him even deeper inside.",
-        "a": "x9c8c9ff0a3"
-       },
-       {
-        "t": "Patience gives others time to feel safe.",
-        "a": "x58b55c0069"
+      "text": {
+       "v": {
+        "hamster": [
+         {
+          "t": "You let Peanut come out when he felt safe.",
+          "a": "xbd818fa7d7"
+         },
+         {
+          "t": "Rushing would have scared him even deeper inside.",
+          "a": "x9c8c9ff0a3"
+         },
+         {
+          "t": "Patience gives others time to feel safe.",
+          "a": "x58b55c0069"
+         }
+        ],
+        "puppy": [
+         {
+          "t": "You let Biscuit come out when he felt safe.",
+          "a": "x031ca5804a"
+         },
+         {
+          "t": "Rushing would have scared him even deeper inside.",
+          "a": "x9c8c9ff0a3"
+         },
+         {
+          "t": "Patience gives others time to feel safe.",
+          "a": "x58b55c0069"
+         }
+        ],
+        "kitten": [
+         {
+          "t": "You let Mittens come out when he felt safe.",
+          "a": "xad6a635701"
+         },
+         {
+          "t": "Rushing would have scared him even deeper inside.",
+          "a": "x9c8c9ff0a3"
+         },
+         {
+          "t": "Patience gives others time to feel safe.",
+          "a": "x58b55c0069"
+         }
+        ],
+        "dinosaur": [
+         {
+          "t": "You let Rex come out when he felt safe.",
+          "a": "x132351155f"
+         },
+         {
+          "t": "Rushing would have scared him even deeper inside.",
+          "a": "x9c8c9ff0a3"
+         },
+         {
+          "t": "Patience gives others time to feel safe.",
+          "a": "x58b55c0069"
+         }
+        ]
        }
-      ],
+      },
       "tagSay": {
        "t": "Patience!",
        "a": "x2aed5e510c"
@@ -749,8 +1203,24 @@
       "mood": "calm"
      },
      "say": {
-      "t": "Choice one: Lay out seeds and wait very quietly.",
-      "a": "x164323928b"
+      "v": {
+       "hamster": {
+        "t": "Choice one: Lay out sunflower seeds and wait very quietly.",
+        "a": "xa47064da0c"
+       },
+       "puppy": {
+        "t": "Choice one: Lay out dog treats and wait very quietly.",
+        "a": "x1a1f20b3af"
+       },
+       "kitten": {
+        "t": "Choice one: Lay out kitty treats and wait very quietly.",
+        "a": "x31101396d2"
+       },
+       "dinosaur": {
+        "t": "Choice one: Lay out lettuce leaves and wait very quietly.",
+        "a": "x668c91c959"
+       }
+      }
      }
     },
     {
@@ -789,59 +1259,191 @@
     },
     {
      "id": "bang",
-     "t": "Bang on the vent to scare him out",
+     "t": "Bang on {bang} to scare him out",
      "to": "d6",
      "tr": {
       "Patience": -1
      },
-     "log": "You banged on the vent",
+     "log": "You banged on {bang}",
      "weak": true,
      "missed": "Patience",
      "consequence": [
-      [
-       {
-        "t": "Bang!",
-        "a": "xaf3b9391c6"
-       },
-       {
-        "t": "Bang!",
-        "a": "xaf3b9391c6"
-       },
-       {
-        "t": "Peanut squeaks, and scurries even deeper into the wall.",
-        "a": "x2ff6efe180"
-       },
-       {
-        "t": "Now you can't hear him at all.",
-        "a": "x194ec45d6c"
-       },
-       {
-        "t": "It takes the rest of the morning before he's brave enough to come back.",
-        "a": "x67f64b2ccc"
+      {
+       "v": {
+        "hamster": [
+         {
+          "t": "Bang!",
+          "a": "xaf3b9391c6"
+         },
+         {
+          "t": "Bang!",
+          "a": "xaf3b9391c6"
+         },
+         {
+          "t": "Peanut squeaks, and scurries even deeper into the wall.",
+          "a": "x2ff6efe180"
+         },
+         {
+          "t": "Now you can't hear him at all.",
+          "a": "x194ec45d6c"
+         },
+         {
+          "t": "It takes the rest of the morning before he's brave enough to come back.",
+          "a": "x67f64b2ccc"
+         }
+        ],
+        "puppy": [
+         {
+          "t": "Bang!",
+          "a": "xaf3b9391c6"
+         },
+         {
+          "t": "Bang!",
+          "a": "xaf3b9391c6"
+         },
+         {
+          "t": "Biscuit whimpers, and scurries to the very back of the closet.",
+          "a": "xd2dbaaaa9a"
+         },
+         {
+          "t": "Now you can't hear him at all.",
+          "a": "x194ec45d6c"
+         },
+         {
+          "t": "It takes the rest of the morning before he's brave enough to come back.",
+          "a": "x67f64b2ccc"
+         }
+        ],
+        "kitten": [
+         {
+          "t": "Bang!",
+          "a": "xaf3b9391c6"
+         },
+         {
+          "t": "Bang!",
+          "a": "xaf3b9391c6"
+         },
+         {
+          "t": "Mittens meows, and scurries even farther behind the bookshelf.",
+          "a": "xdbdc06518c"
+         },
+         {
+          "t": "Now you can't hear him at all.",
+          "a": "x194ec45d6c"
+         },
+         {
+          "t": "It takes the rest of the morning before he's brave enough to come back.",
+          "a": "x67f64b2ccc"
+         }
+        ],
+        "dinosaur": [
+         {
+          "t": "Bang!",
+          "a": "xaf3b9391c6"
+         },
+         {
+          "t": "Bang!",
+          "a": "xaf3b9391c6"
+         },
+         {
+          "t": "Rex chirps, and scurries to the very back of the cabinet.",
+          "a": "x398295ee3b"
+         },
+         {
+          "t": "Now you can't hear him at all.",
+          "a": "x194ec45d6c"
+         },
+         {
+          "t": "It takes the rest of the morning before he's brave enough to come back.",
+          "a": "x67f64b2ccc"
+         }
+        ]
        }
-      ]
-     ],
-     "think": [
-      {
-       "t": "Peanut is small, and he was already frightened.",
-       "a": "xd83d2654cd"
-      },
-      {
-       "t": "Loud noises made him feel even less safe, so he hid.",
-       "a": "xa3d1d22689"
-      },
-      {
-       "t": "Being gentle and patient helps scared creatures, and scared people, feel safe enough to come out.",
-       "a": "x7ca6776d52"
       }
      ],
+     "think": {
+      "v": {
+       "hamster": [
+        {
+         "t": "Peanut is small, and he was already frightened.",
+         "a": "xd83d2654cd"
+        },
+        {
+         "t": "Loud noises made him feel even less safe, so he hid.",
+         "a": "xa3d1d22689"
+        },
+        {
+         "t": "Being gentle and patient helps scared creatures, and scared people, feel safe enough to come out.",
+         "a": "x7ca6776d52"
+        }
+       ],
+       "puppy": [
+        {
+         "t": "Biscuit is small, and he was already frightened.",
+         "a": "x7e78fe03ac"
+        },
+        {
+         "t": "Loud noises made him feel even less safe, so he hid.",
+         "a": "xa3d1d22689"
+        },
+        {
+         "t": "Being gentle and patient helps scared creatures, and scared people, feel safe enough to come out.",
+         "a": "x7ca6776d52"
+        }
+       ],
+       "kitten": [
+        {
+         "t": "Mittens is small, and he was already frightened.",
+         "a": "xc7b39f7a87"
+        },
+        {
+         "t": "Loud noises made him feel even less safe, so he hid.",
+         "a": "xa3d1d22689"
+        },
+        {
+         "t": "Being gentle and patient helps scared creatures, and scared people, feel safe enough to come out.",
+         "a": "x7ca6776d52"
+        }
+       ],
+       "dinosaur": [
+        {
+         "t": "Rex is small, and he was already frightened.",
+         "a": "x7754f52cbb"
+        },
+        {
+         "t": "Loud noises made him feel even less safe, so he hid.",
+         "a": "xa3d1d22689"
+        },
+        {
+         "t": "Being gentle and patient helps scared creatures, and scared people, feel safe enough to come out.",
+         "a": "x7ca6776d52"
+        }
+       ]
+      }
+     },
      "face": {
       "who": "you",
       "mood": "surprised"
      },
      "say": {
-      "t": "Choice three: Bang on the vent to scare him out.",
-      "a": "x5c9e33761e"
+      "v": {
+       "hamster": {
+        "t": "Choice three: Bang on the vent to scare him out.",
+        "a": "x5c9e33761e"
+       },
+       "puppy": {
+        "t": "Choice three: Bang on the closet door to scare him out.",
+        "a": "x525ba50d17"
+       },
+       "kitten": {
+        "t": "Choice three: Bang on the bookshelf to scare him out.",
+        "a": "x942898d6be"
+       },
+       "dinosaur": {
+        "t": "Choice three: Bang on the cabinet to scare him out.",
+        "a": "x10882ca89e"
+       }
+      }
      }
     }
    ],
@@ -859,34 +1461,114 @@
   "d6": {
    "ch": "Chapter 3 · The rescue",
    "text": [
-    [
-     {
-      "t": "It takes a while, but it works.",
-      "a": "x8c850da99f"
-     },
-     {
-      "t": "A pink nose pokes out.",
-      "a": "x4db5574415"
-     },
-     {
-      "t": "Then whiskers.",
-      "a": "x31991bfb05"
-     },
-     {
-      "t": "Then all of Peanut!",
-      "a": "xaee345e655"
+    {
+     "v": {
+      "hamster": [
+       {
+        "t": "It takes a while, but it works. {peek}",
+        "a": "x5925b27d86"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "It takes a while, but it works.",
+        "a": "x8c850da99f"
+       },
+       {
+        "t": "A wet black nose pokes out.",
+        "a": "xd3a7e71404"
+       },
+       {
+        "t": "Then two floppy ears.",
+        "a": "x88591eb4cf"
+       },
+       {
+        "t": "Then all of Biscuit!",
+        "a": "x5dc28a2aa6"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "It takes a while, but it works.",
+        "a": "x8c850da99f"
+       },
+       {
+        "t": "A pink nose pokes out.",
+        "a": "x4db5574415"
+       },
+       {
+        "t": "Then long whiskers.",
+        "a": "x010177b9ae"
+       },
+       {
+        "t": "Then all of Mittens!",
+        "a": "x5ccc306a3b"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "It takes a while, but it works.",
+        "a": "x8c850da99f"
+       },
+       {
+        "t": "A little green snout pokes out.",
+        "a": "xc08f43fa30"
+       },
+       {
+        "t": "Then tiny claws.",
+        "a": "x5745c3226d"
+       },
+       {
+        "t": "Then all of Rex!",
+        "a": "xdf79285c19"
+       }
+      ]
      }
-    ],
-    [
-     {
-      "t": "You scoop him up very carefully.",
-      "a": "xab2bdee6fa"
-     },
-     {
-      "t": "Peanut is safe.",
-      "a": "x8e2be09f9e"
+    },
+    {
+     "v": {
+      "hamster": [
+       {
+        "t": "You scoop him up very carefully.",
+        "a": "xab2bdee6fa"
+       },
+       {
+        "t": "Peanut is safe.",
+        "a": "x8e2be09f9e"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "You scoop him up very carefully.",
+        "a": "xab2bdee6fa"
+       },
+       {
+        "t": "Biscuit is safe.",
+        "a": "xefa685305b"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "You scoop him up very carefully.",
+        "a": "xab2bdee6fa"
+       },
+       {
+        "t": "Mittens is safe.",
+        "a": "x518465977c"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "You scoop him up very carefully.",
+        "a": "xab2bdee6fa"
+       },
+       {
+        "t": "Rex is safe.",
+        "a": "x9d3a5479da"
+       }
+      ]
      }
-    ],
+    },
     [
      {
       "t": "Leo whispers, \"Please don't tell.",
@@ -944,16 +1626,50 @@
      "log": "You told Ms. Rivera the whole story",
      "lesson": {
       "trait": "Honesty",
-      "text": [
-       {
-        "t": "You told the truth, even though it was hard.",
-        "a": "xbb92812bca"
-       },
-       {
-        "t": "Ms. Rivera needed to know what happened, so she could keep Peanut safe.",
-        "a": "x961258bc43"
+      "text": {
+       "v": {
+        "hamster": [
+         {
+          "t": "You told the truth, even though it was hard.",
+          "a": "xbb92812bca"
+         },
+         {
+          "t": "Ms. Rivera needed to know what happened, so she could keep Peanut safe.",
+          "a": "x961258bc43"
+         }
+        ],
+        "puppy": [
+         {
+          "t": "You told the truth, even though it was hard.",
+          "a": "xbb92812bca"
+         },
+         {
+          "t": "Ms. Rivera needed to know what happened, so she could keep Biscuit safe.",
+          "a": "x92253316de"
+         }
+        ],
+        "kitten": [
+         {
+          "t": "You told the truth, even though it was hard.",
+          "a": "xbb92812bca"
+         },
+         {
+          "t": "Ms. Rivera needed to know what happened, so she could keep Mittens safe.",
+          "a": "x8d0483c22c"
+         }
+        ],
+        "dinosaur": [
+         {
+          "t": "You told the truth, even though it was hard.",
+          "a": "xbb92812bca"
+         },
+         {
+          "t": "Ms. Rivera needed to know what happened, so she could keep Rex safe.",
+          "a": "xcdd9335ebe"
+         }
+        ]
        }
-      ],
+      },
       "tagSay": {
        "t": "Honesty!",
        "a": "xd83e254d53"
@@ -979,51 +1695,191 @@
      "weak": true,
      "missed": "Honesty",
      "consequence": [
-      [
-       {
-        "t": "You promise.",
-        "a": "x44a50bfb99"
-       },
-       {
-        "t": "Leo looks relieved.",
-        "a": "x6a225a0b27"
-       },
-       {
-        "t": "But the next morning, Ms. Rivera asks the class who opened the cage.",
-        "a": "x54641f7cb9"
-       },
-       {
-        "t": "Nobody says anything.",
-        "a": "x3ce1dab474"
-       },
-       {
-        "t": "She sighs, and says Peanut might have to move to another classroom, where he'll be safer.",
-        "a": "xfd19e9faff"
-       },
-       {
-        "t": "Your stomach twists into a knot.",
-        "a": "xb4de8fa51d"
+      {
+       "v": {
+        "hamster": [
+         {
+          "t": "You promise.",
+          "a": "x44a50bfb99"
+         },
+         {
+          "t": "Leo looks relieved.",
+          "a": "x6a225a0b27"
+         },
+         {
+          "t": "But the next morning, Ms. Rivera asks the class who opened the cage.",
+          "a": "x54641f7cb9"
+         },
+         {
+          "t": "Nobody says anything.",
+          "a": "x3ce1dab474"
+         },
+         {
+          "t": "She sighs, and says Peanut might have to move to another classroom, where he'll be safer.",
+          "a": "xfd19e9faff"
+         },
+         {
+          "t": "Your stomach twists into a knot.",
+          "a": "xb4de8fa51d"
+         }
+        ],
+        "puppy": [
+         {
+          "t": "You promise.",
+          "a": "x44a50bfb99"
+         },
+         {
+          "t": "Leo looks relieved.",
+          "a": "x6a225a0b27"
+         },
+         {
+          "t": "But the next morning, Ms. Rivera asks the class who opened the pen.",
+          "a": "xc063f1949c"
+         },
+         {
+          "t": "Nobody says anything.",
+          "a": "x3ce1dab474"
+         },
+         {
+          "t": "She sighs, and says Biscuit might have to move to another classroom, where he'll be safer.",
+          "a": "x68e43c7a92"
+         },
+         {
+          "t": "Your stomach twists into a knot.",
+          "a": "xb4de8fa51d"
+         }
+        ],
+        "kitten": [
+         {
+          "t": "You promise.",
+          "a": "x44a50bfb99"
+         },
+         {
+          "t": "Leo looks relieved.",
+          "a": "x6a225a0b27"
+         },
+         {
+          "t": "But the next morning, Ms. Rivera asks the class who opened the pen.",
+          "a": "xc063f1949c"
+         },
+         {
+          "t": "Nobody says anything.",
+          "a": "x3ce1dab474"
+         },
+         {
+          "t": "She sighs, and says Mittens might have to move to another classroom, where he'll be safer.",
+          "a": "x8dca9af103"
+         },
+         {
+          "t": "Your stomach twists into a knot.",
+          "a": "xb4de8fa51d"
+         }
+        ],
+        "dinosaur": [
+         {
+          "t": "You promise.",
+          "a": "x44a50bfb99"
+         },
+         {
+          "t": "Leo looks relieved.",
+          "a": "x6a225a0b27"
+         },
+         {
+          "t": "But the next morning, Ms. Rivera asks the class who opened the pen.",
+          "a": "xc063f1949c"
+         },
+         {
+          "t": "Nobody says anything.",
+          "a": "x3ce1dab474"
+         },
+         {
+          "t": "She sighs, and says Rex might have to move to another classroom, where he'll be safer.",
+          "a": "xd84fa01b61"
+         },
+         {
+          "t": "Your stomach twists into a knot.",
+          "a": "xb4de8fa51d"
+         }
+        ]
        }
-      ]
-     ],
-     "think": [
-      {
-       "t": "Keeping a secret can feel kind.",
-       "a": "xe93b658f9c"
-      },
-      {
-       "t": "But some secrets stop a problem from getting fixed.",
-       "a": "xc28f8a0fe8"
-      },
-      {
-       "t": "Ms. Rivera needed the truth to keep Peanut safe.",
-       "a": "xe34337fbde"
-      },
-      {
-       "t": "You can be a good friend and be honest, by helping Leo tell the truth himself.",
-       "a": "xc2b161505d"
       }
      ],
+     "think": {
+      "v": {
+       "hamster": [
+        {
+         "t": "Keeping a secret can feel kind.",
+         "a": "xe93b658f9c"
+        },
+        {
+         "t": "But some secrets stop a problem from getting fixed.",
+         "a": "xc28f8a0fe8"
+        },
+        {
+         "t": "Ms. Rivera needed the truth to keep Peanut safe.",
+         "a": "xe34337fbde"
+        },
+        {
+         "t": "You can be a good friend and be honest, by helping Leo tell the truth himself.",
+         "a": "xc2b161505d"
+        }
+       ],
+       "puppy": [
+        {
+         "t": "Keeping a secret can feel kind.",
+         "a": "xe93b658f9c"
+        },
+        {
+         "t": "But some secrets stop a problem from getting fixed.",
+         "a": "xc28f8a0fe8"
+        },
+        {
+         "t": "Ms. Rivera needed the truth to keep Biscuit safe.",
+         "a": "x2f35545085"
+        },
+        {
+         "t": "You can be a good friend and be honest, by helping Leo tell the truth himself.",
+         "a": "xc2b161505d"
+        }
+       ],
+       "kitten": [
+        {
+         "t": "Keeping a secret can feel kind.",
+         "a": "xe93b658f9c"
+        },
+        {
+         "t": "But some secrets stop a problem from getting fixed.",
+         "a": "xc28f8a0fe8"
+        },
+        {
+         "t": "Ms. Rivera needed the truth to keep Mittens safe.",
+         "a": "x00453bbfd2"
+        },
+        {
+         "t": "You can be a good friend and be honest, by helping Leo tell the truth himself.",
+         "a": "xc2b161505d"
+        }
+       ],
+       "dinosaur": [
+        {
+         "t": "Keeping a secret can feel kind.",
+         "a": "xe93b658f9c"
+        },
+        {
+         "t": "But some secrets stop a problem from getting fixed.",
+         "a": "xc28f8a0fe8"
+        },
+        {
+         "t": "Ms. Rivera needed the truth to keep Rex safe.",
+         "a": "x83c2f7227e"
+        },
+        {
+         "t": "You can be a good friend and be honest, by helping Leo tell the truth himself.",
+         "a": "xc2b161505d"
+        }
+       ]
+      }
+     },
      "face": {
       "who": "you",
       "mood": "worried"
@@ -1035,6 +1891,10 @@
     }
    ],
    "faces": [
+    {
+     "who": "pet",
+     "mood": "happy"
+    },
     {
      "who": "leo",
      "mood": "worried"
@@ -1054,95 +1914,325 @@
   [
    {
     "id": "peanut",
-    "text": [
-     {
-      "t": "Peanut is back in his cage, munching seeds like nothing ever happened.",
-      "a": "x3f5534eee6"
+    "text": {
+     "v": {
+      "hamster": [
+       {
+        "t": "Peanut is back in his cage, munching sunflower seeds like nothing ever happened.",
+        "a": "xb874c8183d"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "Biscuit is back in his pen, munching dog treats like nothing ever happened.",
+        "a": "x3bf7aeacb9"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "Mittens is back in his pen, munching kitty treats like nothing ever happened.",
+        "a": "x003415a510"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "Rex is back in his pen, munching lettuce leaves like nothing ever happened.",
+        "a": "xf114f5b723"
+       }
+      ]
      }
-    ]
+    }
    }
   ],
   [
    {
     "if": "help_tell",
     "id": "helptell",
-    "text": [
-     {
-      "t": "Leo told Ms. Rivera everything, with you right beside him.",
-      "a": "x88f3c7ce49"
-     },
-     {
-      "t": "Ms. Rivera gave him a hug, and made him Peanut's official helper for the week.",
-      "a": "xf40c3cab22"
-     },
-     {
-      "t": "Leo smiled for the first time all day.",
-      "a": "x6912c577ef"
+    "text": {
+     "v": {
+      "hamster": [
+       {
+        "t": "Leo told Ms. Rivera everything, with you right beside him.",
+        "a": "x88f3c7ce49"
+       },
+       {
+        "t": "Ms. Rivera gave him a hug, and made him Peanut's official helper for the week.",
+        "a": "xf40c3cab22"
+       },
+       {
+        "t": "Leo smiled for the first time all day.",
+        "a": "x6912c577ef"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "Leo told Ms. Rivera everything, with you right beside him.",
+        "a": "x88f3c7ce49"
+       },
+       {
+        "t": "Ms. Rivera gave him a hug, and made him Biscuit's official helper for the week.",
+        "a": "xe2e4444c39"
+       },
+       {
+        "t": "Leo smiled for the first time all day.",
+        "a": "x6912c577ef"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "Leo told Ms. Rivera everything, with you right beside him.",
+        "a": "x88f3c7ce49"
+       },
+       {
+        "t": "Ms. Rivera gave him a hug, and made him Mittens's official helper for the week.",
+        "a": "xc59d896fd8"
+       },
+       {
+        "t": "Leo smiled for the first time all day.",
+        "a": "x6912c577ef"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "Leo told Ms. Rivera everything, with you right beside him.",
+        "a": "x88f3c7ce49"
+       },
+       {
+        "t": "Ms. Rivera gave him a hug, and made him Rex's official helper for the week.",
+        "a": "x7d46a9a34d"
+       },
+       {
+        "t": "Leo smiled for the first time all day.",
+        "a": "x6912c577ef"
+       }
+      ]
      }
-    ]
+    }
    },
    {
     "if": "secret",
     "id": "secret",
-    "text": [
-     {
-      "t": "In the end, you and Leo went to Ms. Rivera together and told her the truth.",
-      "a": "xaaaafcc320"
-     },
-     {
-      "t": "Peanut got to stay in Room 12.",
-      "a": "x0326187931"
-     },
-     {
-      "t": "But that knot in your stomach taught you something.",
-      "a": "x7bc30d3a84"
-     },
-     {
-      "t": "Some secrets are too heavy to carry.",
-      "a": "x510644c284"
+    "text": {
+     "v": {
+      "hamster": [
+       {
+        "t": "In the end, you and Leo went to Ms. Rivera together and told her the truth.",
+        "a": "xaaaafcc320"
+       },
+       {
+        "t": "Peanut got to stay in Room 12.",
+        "a": "x0326187931"
+       },
+       {
+        "t": "But that knot in your stomach taught you something.",
+        "a": "x7bc30d3a84"
+       },
+       {
+        "t": "Some secrets are too heavy to carry.",
+        "a": "x510644c284"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "In the end, you and Leo went to Ms. Rivera together and told her the truth.",
+        "a": "xaaaafcc320"
+       },
+       {
+        "t": "Biscuit got to stay in Room 12.",
+        "a": "x0e9087831d"
+       },
+       {
+        "t": "But that knot in your stomach taught you something.",
+        "a": "x7bc30d3a84"
+       },
+       {
+        "t": "Some secrets are too heavy to carry.",
+        "a": "x510644c284"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "In the end, you and Leo went to Ms. Rivera together and told her the truth.",
+        "a": "xaaaafcc320"
+       },
+       {
+        "t": "Mittens got to stay in Room 12.",
+        "a": "x12becaa080"
+       },
+       {
+        "t": "But that knot in your stomach taught you something.",
+        "a": "x7bc30d3a84"
+       },
+       {
+        "t": "Some secrets are too heavy to carry.",
+        "a": "x510644c284"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "In the end, you and Leo went to Ms. Rivera together and told her the truth.",
+        "a": "xaaaafcc320"
+       },
+       {
+        "t": "Rex got to stay in Room 12.",
+        "a": "xa160ef2c0a"
+       },
+       {
+        "t": "But that knot in your stomach taught you something.",
+        "a": "x7bc30d3a84"
+       },
+       {
+        "t": "Some secrets are too heavy to carry.",
+        "a": "x510644c284"
+       }
+      ]
      }
-    ]
+    }
    },
    {
     "id": "tellall",
-    "text": [
-     {
-      "t": "Ms. Rivera listened to the whole story.",
-      "a": "xe8c5afd48a"
-     },
-     {
-      "t": "Leo was upset at first.",
-      "a": "xac4f43724a"
-     },
-     {
-      "t": "But once he explained how much he missed his dog, everyone understood.",
-      "a": "x13e5a07a6e"
-     },
-     {
-      "t": "The class decided to take turns holding Peanut, the safe way.",
-      "a": "x0890ff3c26"
+    "text": {
+     "v": {
+      "hamster": [
+       {
+        "t": "Ms. Rivera listened to the whole story.",
+        "a": "xe8c5afd48a"
+       },
+       {
+        "t": "Leo was upset at first.",
+        "a": "xac4f43724a"
+       },
+       {
+        "t": "But once he explained how much he missed his dog, everyone understood.",
+        "a": "x13e5a07a6e"
+       },
+       {
+        "t": "The class decided to take turns holding Peanut, the safe way.",
+        "a": "x0890ff3c26"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "Ms. Rivera listened to the whole story.",
+        "a": "xe8c5afd48a"
+       },
+       {
+        "t": "Leo was upset at first.",
+        "a": "xac4f43724a"
+       },
+       {
+        "t": "But once he explained how much he missed his dog, everyone understood.",
+        "a": "x13e5a07a6e"
+       },
+       {
+        "t": "The class decided to take turns holding Biscuit, the safe way.",
+        "a": "x5fc25ff616"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "Ms. Rivera listened to the whole story.",
+        "a": "xe8c5afd48a"
+       },
+       {
+        "t": "Leo was upset at first.",
+        "a": "xac4f43724a"
+       },
+       {
+        "t": "But once he explained how much he missed his dog, everyone understood.",
+        "a": "x13e5a07a6e"
+       },
+       {
+        "t": "The class decided to take turns holding Mittens, the safe way.",
+        "a": "xad4ff46851"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "Ms. Rivera listened to the whole story.",
+        "a": "xe8c5afd48a"
+       },
+       {
+        "t": "Leo was upset at first.",
+        "a": "xac4f43724a"
+       },
+       {
+        "t": "But once he explained how much he missed his dog, everyone understood.",
+        "a": "x13e5a07a6e"
+       },
+       {
+        "t": "The class decided to take turns holding Rex, the safe way.",
+        "a": "x7c569eebde"
+       }
+      ]
      }
-    ]
+    }
    }
   ],
   [
    {
     "if": "accuse",
     "id": "sorry",
-    "text": [
-     {
-      "t": "Later, you remembered pointing at Leo in front of everyone, and you told him you were sorry.",
-      "a": "x084434dbb0"
-     },
-     {
-      "t": "Leo said, \"It's okay.",
-      "a": "x70ad9a444f"
-     },
-     {
-      "t": "Thanks for finding Peanut.\"",
-      "a": "x5043491d3b"
+    "text": {
+     "v": {
+      "hamster": [
+       {
+        "t": "Later, you remembered pointing at Leo in front of everyone, and you told him you were sorry.",
+        "a": "x084434dbb0"
+       },
+       {
+        "t": "Leo said, \"It's okay.",
+        "a": "x70ad9a444f"
+       },
+       {
+        "t": "Thanks for finding Peanut.\"",
+        "a": "x5043491d3b"
+       }
+      ],
+      "puppy": [
+       {
+        "t": "Later, you remembered pointing at Leo in front of everyone, and you told him you were sorry.",
+        "a": "x084434dbb0"
+       },
+       {
+        "t": "Leo said, \"It's okay.",
+        "a": "x70ad9a444f"
+       },
+       {
+        "t": "Thanks for finding Biscuit.\"",
+        "a": "xb07c26bcf4"
+       }
+      ],
+      "kitten": [
+       {
+        "t": "Later, you remembered pointing at Leo in front of everyone, and you told him you were sorry.",
+        "a": "x084434dbb0"
+       },
+       {
+        "t": "Leo said, \"It's okay.",
+        "a": "x70ad9a444f"
+       },
+       {
+        "t": "Thanks for finding Mittens.\"",
+        "a": "x8b39e405b8"
+       }
+      ],
+      "dinosaur": [
+       {
+        "t": "Later, you remembered pointing at Leo in front of everyone, and you told him you were sorry.",
+        "a": "x084434dbb0"
+       },
+       {
+        "t": "Leo said, \"It's okay.",
+        "a": "x70ad9a444f"
+       },
+       {
+        "t": "Thanks for finding Rex.\"",
+        "a": "xb6a2207eef"
+       }
+      ]
      }
-    ]
+    }
    },
    {
     "if": "share",
@@ -1190,7 +2280,7 @@
   "Patience": "The Patient Detective"
  },
  "talk": [
-  "Leo opened the cage because he missed his dog. Have you ever done something you shouldn't have because you were feeling sad?",
+  "Leo opened the {home} because he missed his dog. Have you ever done something you shouldn't have because you were feeling sad?",
   "Why do you think it was so hard for Leo to tell the truth?",
   "Are some secrets okay to keep, and some not okay? What's the difference?",
   "Tell about a time someone showed you empathy. How did it feel?"
@@ -1219,6 +2309,10 @@
  },
  "endFaces": [
   {
+   "who": "pet",
+   "mood": "happy"
+  },
+  {
    "who": "leo",
    "mood": "happy"
   },
@@ -1227,9 +2321,96 @@
    "mood": "happy"
   }
  ],
+ "petDefault": "hamster",
+ "pets": {
+  "hamster": {
+   "label": "Hamster",
+   "Kind": "Hamster",
+   "kind": "hamster",
+   "Name": "Peanut",
+   "home": "cage",
+   "food": "sunflower seeds",
+   "food1": "seed",
+   "went": "into the heater vent",
+   "place": "the heater vent",
+   "inside": "inside the wall",
+   "deeper": "even deeper into the wall",
+   "bang": "the vent",
+   "sound": "squeak",
+   "sounds": "squeaks",
+   "peek": "{peek}"
+  },
+  "puppy": {
+   "label": "Puppy",
+   "Kind": "Puppy",
+   "kind": "puppy",
+   "Name": "Biscuit",
+   "home": "pen",
+   "food": "dog treats",
+   "food1": "treat",
+   "went": "into the supply closet",
+   "place": "the supply closet",
+   "inside": "inside the closet",
+   "deeper": "to the very back of the closet",
+   "bang": "the closet door",
+   "sound": "whimper",
+   "sounds": "whimpers",
+   "peek": "A wet black nose pokes out. Then two floppy ears. Then all of Biscuit!"
+  },
+  "kitten": {
+   "label": "Kitten",
+   "Kind": "Kitten",
+   "kind": "kitten",
+   "Name": "Mittens",
+   "home": "pen",
+   "food": "kitty treats",
+   "food1": "treat",
+   "went": "behind the big bookshelf",
+   "place": "the big bookshelf",
+   "inside": "behind the bookshelf",
+   "deeper": "even farther behind the bookshelf",
+   "bang": "the bookshelf",
+   "sound": "meow",
+   "sounds": "meows",
+   "peek": "A pink nose pokes out. Then long whiskers. Then all of Mittens!"
+  },
+  "dinosaur": {
+   "label": "Dinosaur",
+   "Kind": "Dinosaur",
+   "kind": "baby dinosaur",
+   "Name": "Rex",
+   "home": "pen",
+   "food": "lettuce leaves",
+   "food1": "leaf",
+   "went": "into the art cabinet",
+   "place": "the art cabinet",
+   "inside": "inside the cabinet",
+   "deeper": "to the very back of the cabinet",
+   "bang": "the cabinet",
+   "sound": "chirp",
+   "sounds": "chirps",
+   "peek": "A little green snout pokes out. Then tiny claws. Then all of Rex!"
+  }
+ },
  "startSay": {
-  "t": "The Case of the Missing Hamster.",
-  "a": "x2d3895ce4b"
+  "v": {
+   "hamster": {
+    "t": "The Case of the Missing Hamster.",
+    "a": "x2d3895ce4b"
+   },
+   "puppy": {
+    "t": "The Case of the Missing Puppy.",
+    "a": "x57f1212d84"
+   },
+   "kitten": {
+    "t": "The Case of the Missing Kitten.",
+    "a": "xf2db5833ea"
+   },
+   "dinosaur": {
+    "t": "The Case of the Missing Dinosaur.",
+    "a": "x944f8c6221"
+   }
+  }
  },
  "thinkSay": {
   "t": "Hmm. Let's think about that.",

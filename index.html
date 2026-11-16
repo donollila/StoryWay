@@ -97,6 +97,13 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-of
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 
+/* favorite animal */
+.prefs{display:flex;flex-direction:column;gap:16px}
+.flabel{font-weight:700}
+.pets{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pet{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--bg);border:2px solid var(--line);border-radius:16px;padding:8px 4px;font-weight:700;font-size:.9rem}
+.pet svg{width:52px;height:52px}
+.pet.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
 /* faces */
 .faces{display:flex;gap:14px;flex-wrap:wrap}
 .face{margin:0;display:flex;flex-direction:column;align-items:center;gap:4px;width:96px}
@@ -150,7 +157,7 @@ const ICONS={
  puppy:`<svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="var(--accent-soft)"/><ellipse cx="22" cy="32" rx="7" ry="13" fill="var(--accent)"/><ellipse cx="50" cy="32" rx="7" ry="13" fill="var(--accent)"/><circle cx="36" cy="38" r="15" fill="var(--card)" stroke="var(--accent)" stroke-width="3"/><circle cx="31" cy="35" r="2.5" fill="var(--accent)"/><circle cx="41" cy="35" r="2.5" fill="var(--accent)"/><ellipse cx="36" cy="43" rx="4" ry="3" fill="var(--sun)"/></svg>`
 };
 let CATALOG=null, ST=null;
-let S={name:"Alex",traits:{},log:[],picks:[],rethink:[],retries:0,auto:true};
+let S={name:"Alex",pet:"hamster",traits:{},log:[],picks:[],rethink:[],retries:0,auto:true};
 const app=document.getElementById("app");
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const getJSON=u=>fetch(u).then(r=>{if(!r.ok)throw new Error(u);return r.json()});
@@ -186,22 +193,49 @@ function togglePlay(){
   else playQueue(current);
 }
 function mediaInfo(title){ try{ if(!("mediaSession" in navigator))return;
-  navigator.mediaSession.metadata=new MediaMetadata({title,artist:"StoryWay Kids",album:ST?ST.title:"StoryWay Kids",artwork:[{src:"icon-512.png",sizes:"512x512",type:"image/png"}]});
+  navigator.mediaSession.metadata=new MediaMetadata({title,artist:"StoryWay Kids",album:ST?fill(ST.title):"StoryWay Kids",artwork:[{src:"icon-512.png",sizes:"512x512",type:"image/png"}]});
   navigator.mediaSession.setActionHandler("play",()=>{audio.play().then(()=>setPlaying(true)).catch(()=>{})});
   navigator.mediaSession.setActionHandler("pause",()=>{audio.pause();setPlaying(false)}); }catch(e){} }
 function narrate(title,gate){mediaInfo(title||"StoryWay Kids");stop();current=Q;queue=current;limit=gate??Infinity;if(S.auto)playQueue(current);}
 /* building narrated text: each call adds a clip to Q and tags its words with that clip's place */
 function q(clip){Q.push(clip);return Q.length-1;}
-const sp=o=>`<span class="s" data-q="${q(o.a)}">${esc(o.t)}</span>`;
+const sp=o=>{o=V(o);return `<span class="s" data-q="${q(o.a)}">${esc(o.t)}</span>`;};
 const at=clip=>`data-q="${q(clip)}"`;
 function para(p,cls,clip){ // p: list of sentences, or plain text read by one clip
+  p=V(p);
   if(typeof p==="string") return `<p class="${cls||""}"><span class="s" data-q="${q(clip)}">${esc(p)}</span></p>`;
   return `<p class="${cls||""}">${p.map(sp).join(" ")}</p>`;
 }
-const isQuote=p=>(typeof p==="string"?p:p[0].t).startsWith('"');
+const isQuote=p=>{p=V(p);return (typeof p==="string"?p:p[0].t).startsWith('"');};
 // tap any sentence to hear it from there
 app.addEventListener("click",e=>{const s=e.target.closest(".s");if(!s||!current.length)return;
   playQueue(current,+s.dataset.q);});
+
+/* ---------- FAVORITE PET: the child picks one, stories fill in its details ---------- */
+const PET_ART={
+ hamster:(ink)=>`<circle cx="34" cy="38" r="12" fill="#E8B07A" stroke="${ink}" stroke-width="2.5"/><circle cx="86" cy="38" r="12" fill="#E8B07A" stroke="${ink}" stroke-width="2.5"/><circle cx="34" cy="38" r="6" fill="#F4A6A6"/><circle cx="86" cy="38" r="6" fill="#F4A6A6"/>
+   <ellipse cx="60" cy="66" rx="40" ry="36" fill="#E8B07A" stroke="${ink}" stroke-width="2.5"/><ellipse cx="60" cy="78" rx="22" ry="18" fill="#FBEBD9"/>`,
+ puppy:(ink)=>`<ellipse cx="60" cy="62" rx="36" ry="38" fill="#B87A48" stroke="${ink}" stroke-width="2.5"/>
+   <path d="M28 40 Q12 52 18 82 Q30 80 34 58Z" fill="#6E4325" stroke="${ink}" stroke-width="2.5"/><path d="M92 40 Q108 52 102 82 Q90 80 86 58Z" fill="#6E4325" stroke="${ink}" stroke-width="2.5"/>
+   <ellipse cx="60" cy="80" rx="20" ry="15" fill="#E9C9A6"/>`,
+ kitten:(ink)=>`<path d="M26 50 L30 16 L52 36Z" fill="#9AA3AE" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/><path d="M94 50 L90 16 L68 36Z" fill="#9AA3AE" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/><path d="M32 40 L33 25 L44 36Z" fill="#F4A6A6"/><path d="M88 40 L87 25 L76 36Z" fill="#F4A6A6"/>
+   <ellipse cx="60" cy="66" rx="38" ry="34" fill="#9AA3AE" stroke="${ink}" stroke-width="2.5"/><ellipse cx="60" cy="80" rx="18" ry="13" fill="#E4E8EC"/>`,
+ dinosaur:(ink)=>`<path d="M40 30 L46 16 L52 28 L58 12 L64 28 L70 16 L76 30Z" fill="#E9A72E" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>
+   <ellipse cx="60" cy="64" rx="40" ry="36" fill="#6DBB6A" stroke="${ink}" stroke-width="2.5"/><ellipse cx="60" cy="80" rx="26" ry="16" fill="#A9DDA4"/>`
+};
+function petSVG(kind,mood){
+  const ink="#3B2A20", art=(PET_ART[kind]||PET_ART.hamster)(ink), happy=mood!=="sad";
+  const nose={puppy:`<ellipse cx="60" cy="72" rx="7" ry="5" fill="${ink}"/>`,dinosaur:`<circle cx="54" cy="74" r="2" fill="${ink}"/><circle cx="66" cy="74" r="2" fill="${ink}"/>`}[kind]||`<path d="M55 71 L65 71 L60 77Z" fill="#E77A8A"/>`;
+  const whiskers=(kind==="hamster"||kind==="kitten")?`<path d="M36 76 L50 78 M36 84 L50 81 M84 76 L70 78 M84 84 L70 81" stroke="${ink}" stroke-width="1.8" stroke-linecap="round"/>`:"";
+  const mouth=happy?`<path d="M52 82 Q60 90 68 82" fill="none" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>`:`<path d="M52 88 Q60 81 68 88" fill="none" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>`;
+  const tongue=kind==="puppy"&&happy?`<path d="M56 85 Q60 96 64 85Z" fill="#E77A8A"/>`:"";
+  return `<svg viewBox="0 0 120 120" role="img" aria-hidden="true">${art}<circle cx="47" cy="58" r="5" fill="${ink}"/><circle cx="73" cy="58" r="5" fill="${ink}"/><circle cx="49" cy="56" r="1.6" fill="#fff"/><circle cx="75" cy="56" r="1.6" fill="#fff"/>${nose}${whiskers}${mouth}${tongue}</svg>`;
+}
+function loadPrefs(){ try{ const p=JSON.parse(localStorage.getItem("storyway-prefs")||"{}"); if(p.name)S.name=p.name; if(p.pet)S.pet=p.pet; }catch(e){} }
+function savePrefs(){ try{ localStorage.setItem("storyway-prefs",JSON.stringify({name:S.name,pet:S.pet})); }catch(e){} }
+const curPet=()=>(ST&&ST.pets&&ST.pets[S.pet])?S.pet:(ST&&ST.petDefault)||S.pet;
+const V=x=>x&&x.v?(x.v[curPet()]||Object.values(x.v)[0]):x;
+function fill(t,pets){ const P=(pets||(ST&&ST.pets)||{})[pets?S.pet:curPet()]; if(!P||!t)return t; return t.replace(/\{(\w+)\}/g,(m,k)=>P[k]??m); }
 
 /* ---------- FACES: one drawing style, a look per character, a set of expressions ---------- */
 const LOOKS={
@@ -223,6 +257,7 @@ const MOODS={ // word shown under the face, and how each feature is drawn
   surprised:{word:"surprised",brow:"high",eyes:"wide",mouth:"o"}
 };
 function faceSVG(who,mood){
+  if(who==="pet") return petSVG(curPet(),mood);
   const L=LOOKS[who]||LOOKS.you, M=MOODS[mood]||MOODS.calm, ink="#3B2A20";
   const back={
     bun:`<circle cx="60" cy="20" r="14" fill="${L.hair}"/>`,
@@ -263,6 +298,7 @@ function faceSVG(who,mood){
     ${front}${brows}${eyes}${mouth}${extra}</svg>`;
 }
 function feelLine(who,mood){
+  if(who==="pet"){ const P=ST&&ST.pets&&ST.pets[curPet()]; return `${P?P.Name:"Your pet"} feels ${(MOODS[mood]||MOODS.calm).word}`; }
   const c=(ST&&ST.cast&&ST.cast[who])||{name:who,pron:"they"}, w=(MOODS[mood]||MOODS.calm).word;
   return who==="you"?`You feel ${w}`:`${c.name} feels ${w}`;
 }
@@ -278,29 +314,36 @@ async function home(){
   <div class="eyebrow">Listen · Choose · Grow</div>
   <h1>Story<span>Way</span> Kids</h1>
   <p class="lede">Story adventures you listen to and steer. Every choice shows something about who you are, and when a choice goes wrong, you can learn why and try again.</p>
-  <div class="card field"><label for="nm">What's your name, hero?</label>
-   <input id="nm" maxlength="16" value="${esc(S.name)}" autocomplete="off"></div>
+  <div class="card prefs">
+   <div class="field"><label for="nm">What's your name, hero?</label>
+    <input id="nm" maxlength="16" value="${esc(S.name)}" autocomplete="off"></div>
+   <div class="field"><span class="flabel" id="petlbl">Pick your favorite animal</span>
+    <div class="pets" role="radiogroup" aria-labelledby="petlbl">${Object.entries(CATALOG.pets||{}).map(([k,p])=>`<button class="pet ${k===S.pet?"on":""}" role="radio" aria-checked="${k===S.pet}" data-p="${k}">${petSVG(k)}<span>${esc(p.label)}</span></button>`).join("")}</div></div>
+  </div>
   <div class="eyebrow">Your stories</div>
   <div class="stories">${CATALOG.stories.filter(s=>s.owned).map(card).join("")}</div>
   <div class="eyebrow">More stories</div>
   <div class="stories">${CATALOG.stories.filter(s=>!s.owned).map(card).join("")}</div>
   <div id="store" hidden></div>
   <p class="soon">Turn your sound on for narration.</p>`;
+  app.querySelectorAll(".pet").forEach(b=>b.onclick=()=>{
+    S.pet=b.dataset.p; S.name=(document.getElementById("nm").value.trim()||"Alex").slice(0,16); savePrefs(); home();
+  });
   app.querySelectorAll(".story-pick").forEach(b=>b.onclick=()=>{
-    S.name=(document.getElementById("nm").value.trim()||"Alex").slice(0,16);
+    S.name=(document.getElementById("nm").value.trim()||"Alex").slice(0,16); savePrefs();
     const item=CATALOG.stories.find(x=>x.id===b.dataset.k);
     if(item.owned) begin(item.id); else showStore(item);
   });
 }
 function card(s){
   return `<button class="story-pick ${s.owned?"":"locked"}" data-k="${s.id}">${ICONS[s.icon]||ICONS.detective}
-   <div><span class="eyebrow">${esc(s.kind)}</span><h3>${esc(s.title)}</h3><small>${esc(s.age)}</small>
+   <div><span class="eyebrow">${esc(s.kind)}</span><h3>${esc(fill(s.title,CATALOG.pets))}</h3><small>${esc(s.age)}</small>
    ${s.owned?"":`<span class="price">${esc(s.price)}</span>`}</div></button>`;
 }
 function showStore(item){
   const el=document.getElementById("store");
   el.hidden=false; el.className="store";
-  el.innerHTML=`<h3>${esc(item.title)}</h3><p>${esc(item.blurb||"")}</p>
+  el.innerHTML=`<h3>${esc(fill(item.title,CATALOG.pets))}</h3><p>${esc(item.blurb||"")}</p>
    <button class="primary" id="buy">Unlock for ${esc(item.price)}</button>
    <p class="note" id="buymsg"></p>`;
   document.getElementById("buy").onclick=()=>{document.getElementById("buymsg").textContent="Purchases aren't set up in this prototype yet. In the real app, this button opens the App Store purchase, then downloads the story to your phone.";};
@@ -321,20 +364,20 @@ function player(){return `<div class="player"><button class="play" id="play" ari
    <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
    <label class="auto"><input type="checkbox" id="auto" ${S.auto?"checked":""}> Auto-play</label></div>`;}
 function wire(chap){
-  document.getElementById("chap").textContent=chap;
+  document.getElementById("chap").textContent=fill(chap);
   setPlayIcon(playing);
   document.getElementById("play").onclick=togglePlay;
   document.getElementById("auto").onchange=e=>{S.auto=e.target.checked;if(!S.auto)stop();};
   document.getElementById("back").onclick=home;
   window.scrollTo({top:0});
 }
-function apply(c){ for(const[t,v]of Object.entries(c.tr||{}))S.traits[t]=(S.traits[t]||0)+v; S.log.push(c.log); S.picks.push(c.id); }
+function apply(c){ for(const[t,v]of Object.entries(c.tr||{}))S.traits[t]=(S.traits[t]||0)+v; S.log.push(fill(c.log)); S.picks.push(c.id); }
 function go(id){
   if(id==="end")return ending();
   const n=ST.nodes[id];
   if(n.recap)return recap(n.to);
   Q=[];
-  const intro=(id===ST.start&&ST.startSay)?(q(ST.startSay.a),""):"";
+  const intro=(id===ST.start&&ST.startSay)?(q(V(ST.startSay).a),""):"";
   const plain=typeof n.text[0]==="string";
   const body=plain?`<div class="text" ${at("n_"+id)}>${n.text.map(p=>`<p class="${isQuote(p)?"say":""}">${esc(p)}</p>`).join("")}</div>`
     :`<div class="text">${n.text.map(p=>para(p,isQuote(p)?"say":"")).join("")}</div>`;
@@ -349,7 +392,7 @@ function go(id){
       <div class="why" id="why" hidden>${para(f.why)}</div></div>`;
   }
   const ask=n.ask?`<div class="eyebrow" ${at(n.ask.a)}>What will you do?</div>`:`<div class="eyebrow">What will you do?</div>`;
-  const choices=`<div class="choices">${n.choices.map((c,i)=>`<button class="choice" data-i="${i}" ${c.say?at(c.say.a):""}><b>${i+1}</b><span>${esc(c.t)}</span></button>`).join("")}</div>`;
+  const choices=`<div class="choices">${n.choices.map((c,i)=>`<button class="choice" data-i="${i}" ${c.say?at(V(c.say).a):""}><b>${i+1}</b><span>${esc(fill(c.t))}</span></button>`).join("")}</div>`;
   app.innerHTML=`${topBar()}${player()}${intro}${f?"":faceRow(n.faces)}${body}${feel}<div id="decide" ${f?"hidden":""}>${ask}${choices}</div>`;
   wire(n.ch);
   app.querySelectorAll(".choice").forEach(b=>b.onclick=()=>{
@@ -405,7 +448,7 @@ function oops(id,n,c){
   document.getElementById("cont").onclick=()=>{apply(c);S.rethink.push(c);go(c.to);};
   narrate("Let's think about that");
 }
-const plainText=x=>typeof x==="string"?x:x.map(o=>o.t).join(" ");
+const plainText=x=>{x=V(x);return typeof x==="string"?x:x.map(o=>V(o).t).join(" ");};
 function ranked(){return ST.traits.map(t=>[t,S.traits[t]]).sort((a,b)=>b[1]-a[1]);}
 function traitBars(){
   const max=Math.max(4,...Object.values(S.traits));
@@ -444,11 +487,11 @@ function ending(){
    <h2>What I learned</h2>
    <ul class="learned">
     ${shown.map(([t])=>`<li><strong>${t}:</strong> ${esc(ST.bio[t])}</li>`).join("")}
-    ${S.rethink.map(c=>`<li><strong>A moment to rethink:</strong> ${esc(c.log)}. ${esc(plainText(c.think))}</li>`).join("")}
+    ${S.rethink.map(c=>`<li><strong>A moment to rethink:</strong> ${esc(fill(c.log))}. ${esc(plainText(c.think))}</li>`).join("")}
     ${S.feelRight?`<li><strong>Feelings detective:</strong> you read how someone felt ${S.feelRight} time${S.feelRight>1?"s":""} by looking at their face.</li>`:""}
     ${S.retries?`<li><strong>You tried again ${S.retries} time${S.retries>1?"s":""}.</strong> Going back and making a better choice is exactly how people grow.</li>`:""}
    </ul>
-   ${ST.talk?`<div class="talk"><div class="eyebrow">For grown-ups · Talk about it</div><ol>${ST.talk.map(q=>`<li>${esc(q)}</li>`).join("")}</ol></div>`:""}
+   ${ST.talk?`<div class="talk"><div class="eyebrow">For grown-ups · Talk about it</div><ol>${ST.talk.map(t=>`<li>${esc(fill(t))}</li>`).join("")}</ol></div>`:""}
    <h3>Your path</h3>${storySoFar()}
    <div class="choices">
     <button class="primary" id="again" ${at("common/the_end")}>Play again and choose differently</button>
@@ -461,6 +504,7 @@ function ending(){
 }
 let tt;
 function showToast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),1600);}
+loadPrefs();
 home();
 try{ if(window.top===window && location.protocol==="https:" && "serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{}); }catch(e){}
 </script>

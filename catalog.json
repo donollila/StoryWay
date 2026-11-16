@@ -2,7 +2,7 @@
  "stories": [
   {
    "id": "detective",
-   "title": "The Case of the Missing Hamster",
+   "title": "The Case of the Missing {Kind}",
    "kind": "Kid detective",
    "age": "Ages 6–10 · about 15 minutes",
    "icon": "detective",
@@ -26,5 +26,23 @@
    "price": "$2.99",
    "blurb": "A puppy is lost in your neighborhood, and the clues lead to a neighbor nobody talks to."
   }
- ]
+ ],
+ "pets": {
+  "hamster": {
+   "label": "Hamster",
+   "Kind": "Hamster"
+  },
+  "puppy": {
+   "label": "Puppy",
+   "Kind": "Puppy"
+  },
+  "kitten": {
+   "label": "Kitten",
+   "Kind": "Kitten"
+  },
+  "dinosaur": {
+   "label": "Dinosaur",
+   "Kind": "Dinosaur"
+  }
+ }
 }

@@ -1,10 +1,10 @@
 {
  "id": "detective",
- "title": "The Case of the Missing Hamster",
+ "title": "The Case of the Missing {Kind}",
  "kind": "Kid detective",
  "age": "Ages 6–10 · about 15 minutes",
  "start": "d1",
- "intro": "The Case of the Missing Hamster.",
+ "intro": "The Case of the Missing {Kind}.",
  "traits": [
   "Empathy",
   "Honesty",
@@ -23,10 +23,10 @@
  },
  "nodes": {
   "d1": {
-   "ch": "Chapter 1 · The empty cage",
+   "ch": "Chapter 1 · The open door",
    "text": [
-    "It's Monday morning at Maple Street School. You walk into Room 12, and you stop. The door of the hamster cage is wide open.",
-    "Peanut, the class hamster, is gone!",
+    "It's Monday morning at Maple Street School. You walk into Room 12, and you stop. The door of the {kind} {home} is wide open.",
+    "{Name}, the class {kind}, is gone!",
     "Ms. Rivera looks worried. \"We need a good detective,\" she says. And everyone turns to look at you."
    ],
    "choices": [
@@ -66,7 +66,7 @@
     },
     {
      "id": "shout",
-     "t": "Shout, \"Okay, who took Peanut?!\"",
+     "t": "Shout, \"Okay, who took {Name}?!\"",
      "to": "d2b",
      "tr": {
       "Respect": -1
@@ -92,9 +92,9 @@
   "d2a": {
    "ch": "Chapter 2 · The clue trail",
    "text": [
-    "You get down on your hands and knees. Under the reading rug, there's a tiny trail of sunflower seeds.",
+    "You get down on your hands and knees. Under the reading rug, there's a tiny trail of {food}.",
     "The trail leads past the bookshelf, out the door, and toward the hallway lockers.",
-    "Next to the very last seed is a shiny dinosaur sticker. Only one kid in class has dinosaur stickers. Leo."
+    "Next to the very last {food1} is a shiny dinosaur sticker. Only one kid in class has dinosaur stickers. Leo."
    ],
    "choices": [
     {
@@ -102,14 +102,14 @@
      "t": "Follow the trail to the lockers",
      "to": "d3",
      "tr": {},
-     "log": "You followed the seed trail"
+     "log": "You followed the {food1} trail"
     }
    ]
   },
   "d2b": {
    "ch": "Chapter 2 · The witnesses",
    "text": [
-    "Maya raises her hand. \"I saw Leo by the cage before the bell. He looked sad.\"",
+    "Maya raises her hand. \"I saw Leo by the {home} before the bell. He looked sad.\"",
     "Jordan adds, \"He went toward the lockers. Fast.\"",
     "Good detectives listen to everyone. Now you have a lead."
    ],
@@ -132,7 +132,7 @@
   "d3": {
    "ch": "Chapter 2 · Leo",
    "text": [
-    "By the lockers, Leo is sitting on the floor. His eyes are red, and he's holding an empty bag of sunflower seeds.",
+    "By the lockers, Leo is sitting on the floor. His eyes are red, and he's holding an empty bag of {food}.",
     "Other kids start to gather around and whisper. What will you do?"
    ],
    "choices": [
@@ -215,8 +215,8 @@
   "d4": {
    "ch": "Chapter 3 · The truth",
    "text": [
-    "Leo sniffles, and finally starts talking. \"I just wanted to hold Peanut. I miss my dog so much. He moved away with my grandma.\"",
-    "\"I opened the cage, and Peanut ran. He went into the heater vent!\"",
+    "Leo sniffles, and finally starts talking. \"I just wanted to hold {Name}. I miss my dog so much. He moved away with my grandma.\"",
+    "\"I opened the {home}, and {Name} ran. He went {went}!\"",
     "Leo wipes his eyes. \"Everyone's going to think I'm a bad kid.\""
    ],
    "choices": [
@@ -240,12 +240,12 @@
     },
     {
      "id": "together",
-     "t": "Say, \"Come on, let's save Peanut together!\"",
+     "t": "Say, \"Come on, let's save {Name} together!\"",
      "to": "d5",
      "tr": {
       "Courage": 2
      },
-     "log": "You and Leo teamed up to save Peanut",
+     "log": "You and Leo teamed up to save {Name}",
      "lesson": {
       "trait": "Courage",
       "text": "You turned a sad, scary moment into action, and you brought Leo along with you. Brave people help others be brave too."
@@ -293,23 +293,23 @@
    }
   },
   "d5": {
-   "ch": "Chapter 3 · The vent",
+   "ch": "Chapter 3 · The hiding spot",
    "text": [
-    "You kneel down by the heater vent and listen. From inside the wall comes a tiny squeak.",
-    "Peanut is in there, and he sounds scared."
+    "You kneel down by {place} and listen. From {inside} comes a tiny {sound}.",
+    "{Name} is in there, and he sounds scared."
    ],
    "choices": [
     {
      "id": "wait",
-     "t": "Lay out seeds and wait very quietly",
+     "t": "Lay out {food} and wait very quietly",
      "to": "d6",
      "tr": {
       "Patience": 2
      },
-     "log": "You waited quietly with seeds",
+     "log": "You waited quietly with {food}",
      "lesson": {
       "trait": "Patience",
-      "text": "You let Peanut come out when he felt safe. Rushing would have scared him even deeper inside. Patience gives others time to feel safe."
+      "text": "You let {Name} come out when he felt safe. Rushing would have scared him even deeper inside. Patience gives others time to feel safe."
      },
      "face": {
       "who": "you",
@@ -335,16 +335,16 @@
     },
     {
      "id": "bang",
-     "t": "Bang on the vent to scare him out",
+     "t": "Bang on {bang} to scare him out",
      "to": "d6",
      "tr": {
       "Patience": -1
      },
-     "log": "You banged on the vent",
+     "log": "You banged on {bang}",
      "weak": true,
      "missed": "Patience",
-     "consequence": "Bang! Bang! Peanut squeaks, and scurries even deeper into the wall. Now you can't hear him at all. It takes the rest of the morning before he's brave enough to come back.",
-     "think": "Peanut is small, and he was already frightened. Loud noises made him feel even less safe, so he hid. Being gentle and patient helps scared creatures, and scared people, feel safe enough to come out.",
+     "consequence": "Bang! Bang! {Name} {sounds}, and scurries {deeper}. Now you can't hear him at all. It takes the rest of the morning before he's brave enough to come back.",
+     "think": "{Name} is small, and he was already frightened. Loud noises made him feel even less safe, so he hid. Being gentle and patient helps scared creatures, and scared people, feel safe enough to come out.",
      "face": {
       "who": "you",
       "mood": "surprised"
@@ -361,8 +361,8 @@
   "d6": {
    "ch": "Chapter 3 · The rescue",
    "text": [
-    "It takes a while, but it works. A pink nose pokes out. Then whiskers. Then all of Peanut!",
-    "You scoop him up very carefully. Peanut is safe.",
+    "It takes a while, but it works. {peek}",
+    "You scoop him up very carefully. {Name} is safe.",
     "Leo whispers, \"Please don't tell. I'll get in so much trouble.\""
    ],
    "choices": [
@@ -394,7 +394,7 @@
      "log": "You told Ms. Rivera the whole story",
      "lesson": {
       "trait": "Honesty",
-      "text": "You told the truth, even though it was hard. Ms. Rivera needed to know what happened, so she could keep Peanut safe."
+      "text": "You told the truth, even though it was hard. Ms. Rivera needed to know what happened, so she could keep {Name} safe."
      },
      "face": {
       "who": "rivera",
@@ -411,8 +411,8 @@
      "log": "You promised to keep Leo's secret",
      "weak": true,
      "missed": "Honesty",
-     "consequence": "You promise. Leo looks relieved. But the next morning, Ms. Rivera asks the class who opened the cage. Nobody says anything. She sighs, and says Peanut might have to move to another classroom, where he'll be safer. Your stomach twists into a knot.",
-     "think": "Keeping a secret can feel kind. But some secrets stop a problem from getting fixed. Ms. Rivera needed the truth to keep Peanut safe. You can be a good friend and be honest, by helping Leo tell the truth himself.",
+     "consequence": "You promise. Leo looks relieved. But the next morning, Ms. Rivera asks the class who opened the {home}. Nobody says anything. She sighs, and says {Name} might have to move to another classroom, where he'll be safer. Your stomach twists into a knot.",
+     "think": "Keeping a secret can feel kind. But some secrets stop a problem from getting fixed. Ms. Rivera needed the truth to keep {Name} safe. You can be a good friend and be honest, by helping Leo tell the truth himself.",
      "face": {
       "who": "you",
       "mood": "worried"
@@ -420,6 +420,10 @@
     }
    ],
    "faces": [
+    {
+     "who": "pet",
+     "mood": "happy"
+    },
     {
      "who": "leo",
      "mood": "worried"
@@ -435,30 +439,30 @@
   [
    {
     "id": "peanut",
-    "text": "Peanut is back in his cage, munching seeds like nothing ever happened."
+    "text": "{Name} is back in his {home}, munching {food} like nothing ever happened."
    }
   ],
   [
    {
     "if": "help_tell",
     "id": "helptell",
-    "text": "Leo told Ms. Rivera everything, with you right beside him. Ms. Rivera gave him a hug, and made him Peanut's official helper for the week. Leo smiled for the first time all day."
+    "text": "Leo told Ms. Rivera everything, with you right beside him. Ms. Rivera gave him a hug, and made him {Name}'s official helper for the week. Leo smiled for the first time all day."
    },
    {
     "if": "secret",
     "id": "secret",
-    "text": "In the end, you and Leo went to Ms. Rivera together and told her the truth. Peanut got to stay in Room 12. But that knot in your stomach taught you something. Some secrets are too heavy to carry."
+    "text": "In the end, you and Leo went to Ms. Rivera together and told her the truth. {Name} got to stay in Room 12. But that knot in your stomach taught you something. Some secrets are too heavy to carry."
    },
    {
     "id": "tellall",
-    "text": "Ms. Rivera listened to the whole story. Leo was upset at first. But once he explained how much he missed his dog, everyone understood. The class decided to take turns holding Peanut, the safe way."
+    "text": "Ms. Rivera listened to the whole story. Leo was upset at first. But once he explained how much he missed his dog, everyone understood. The class decided to take turns holding {Name}, the safe way."
    }
   ],
   [
    {
     "if": "accuse",
     "id": "sorry",
-    "text": "Later, you remembered pointing at Leo in front of everyone, and you told him you were sorry. Leo said, \"It's okay. Thanks for finding Peanut.\""
+    "text": "Later, you remembered pointing at Leo in front of everyone, and you told him you were sorry. Leo said, \"It's okay. Thanks for finding {Name}.\""
    },
    {
     "if": "share",
@@ -480,7 +484,7 @@
   "Patience": "The Patient Detective"
  },
  "talk": [
-  "Leo opened the cage because he missed his dog. Have you ever done something you shouldn't have because you were feeling sad?",
+  "Leo opened the {home} because he missed his dog. Have you ever done something you shouldn't have because you were feeling sad?",
   "Why do you think it was so hard for Leo to tell the truth?",
   "Are some secrets okay to keep, and some not okay? What's the difference?",
   "Tell about a time someone showed you empathy. How did it feel?"
@@ -509,6 +513,10 @@
  },
  "endFaces": [
   {
+   "who": "pet",
+   "mood": "happy"
+  },
+  {
    "who": "leo",
    "mood": "happy"
   },
@@ -516,5 +524,76 @@
    "who": "you",
    "mood": "happy"
   }
- ]
+ ],
+ "petDefault": "hamster",
+ "pets": {
+  "hamster": {
+   "label": "Hamster",
+   "Kind": "Hamster",
+   "kind": "hamster",
+   "Name": "Peanut",
+   "home": "cage",
+   "food": "sunflower seeds",
+   "food1": "seed",
+   "went": "into the heater vent",
+   "place": "the heater vent",
+   "inside": "inside the wall",
+   "deeper": "even deeper into the wall",
+   "bang": "the vent",
+   "sound": "squeak",
+   "sounds": "squeaks",
+   "peek": "{peek}"
+  },
+  "puppy": {
+   "label": "Puppy",
+   "Kind": "Puppy",
+   "kind": "puppy",
+   "Name": "Biscuit",
+   "home": "pen",
+   "food": "dog treats",
+   "food1": "treat",
+   "went": "into the supply closet",
+   "place": "the supply closet",
+   "inside": "inside the closet",
+   "deeper": "to the very back of the closet",
+   "bang": "the closet door",
+   "sound": "whimper",
+   "sounds": "whimpers",
+   "peek": "A wet black nose pokes out. Then two floppy ears. Then all of Biscuit!"
+  },
+  "kitten": {
+   "label": "Kitten",
+   "Kind": "Kitten",
+   "kind": "kitten",
+   "Name": "Mittens",
+   "home": "pen",
+   "food": "kitty treats",
+   "food1": "treat",
+   "went": "behind the big bookshelf",
+   "place": "the big bookshelf",
+   "inside": "behind the bookshelf",
+   "deeper": "even farther behind the bookshelf",
+   "bang": "the bookshelf",
+   "sound": "meow",
+   "sounds": "meows",
+   "peek": "A pink nose pokes out. Then long whiskers. Then all of Mittens!"
+  },
+  "dinosaur": {
+   "label": "Dinosaur",
+   "Kind": "Dinosaur",
+   "kind": "baby dinosaur",
+   "Name": "Rex",
+   "home": "pen",
+   "food": "lettuce leaves",
+   "food1": "leaf",
+   "went": "into the art cabinet",
+   "place": "the art cabinet",
+   "inside": "inside the cabinet",
+   "deeper": "to the very back of the cabinet",
+   "bang": "the cabinet",
+   "sound": "chirp",
+   "sounds": "chirps",
+   "peek": "A little green snout pokes out. Then tiny claws. Then all of Rex!"
+  }
+ }
 }
